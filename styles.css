@@ -467,7 +467,7 @@ h1, h2, h3 {
   gap: 56px;
   align-items: center;
 }
-.about-photo { position: relative; }
+.about-photo { position: relative; min-width: 0; max-width: 100%; }
 .about-photo img {
   border-radius: 8px;
   width: 100%;
@@ -483,11 +483,13 @@ h1, h2, h3 {
 }
 
 /* The marked placeholder where Mathew's own portrait goes. Flat tint, no
-   gradient, no fake photograph — it reads as intentional, not broken. */
+   gradient, no fake photograph — it reads as intentional, not broken.
+   Width is driven by the grid track (not by height), otherwise the
+   aspect-ratio + min-height combination makes it overflow the column. */
 .about-photo--placeholder {
   display: grid;
   place-items: center;
-  min-height: 100%;
+  width: 100%;
   aspect-ratio: 4 / 3.4;
   background: var(--teal-100);
   border: 1px solid var(--teal-200);
