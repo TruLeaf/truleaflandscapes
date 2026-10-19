@@ -212,7 +212,7 @@ h1, h2, h3 {
 .brand { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
 .brand img { height: 46px; width: auto; }
 
-.main-nav { display: flex; align-items: center; gap: 26px; margin-left: auto; }
+.main-nav { display: flex; align-items: center; gap: 18px; margin-left: auto; }
 .main-nav a {
   color: var(--teal-100);
   text-decoration: none;
@@ -755,9 +755,10 @@ h1, h2, h3 {
   .g-f, .g-e { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
 }
 
-/* The full nav + phone + CTA needs ~965px. Below that the nav collapses into the
-   hamburger, otherwise the header overflows (measured: 18px at 960, 78px at 900). */
-@media (max-width: 1000px) {
+/* The full nav + phone + CTA needs ~1210px once Contact was added to the nav
+   (measured: 80px overflow at 1280, 296px at 1024). Below that the nav
+   collapses into the hamburger, otherwise the header overflows. */
+@media (max-width: 1240px) {
   .main-nav, .header-phone { display: none; }
   .hamburger { display: block; }
   .site-header .wrap { height: 66px; gap: 12px; }
