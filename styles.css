@@ -212,7 +212,7 @@ h1, h2, h3 {
 .brand { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
 .brand img { height: 46px; width: auto; }
 
-.main-nav { display: flex; align-items: center; gap: 18px; margin-left: auto; }
+.main-nav { display: flex; align-items: center; gap: 14px; margin-left: auto; }
 .main-nav a {
   color: var(--teal-100);
   text-decoration: none;
