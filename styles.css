@@ -667,7 +667,19 @@ h1, h2, h3 {
 .foot-base a:hover { color: #fff; text-decoration: underline; }
 
 /* --------------------------------------------------------------------------
-   16. Service page — page head
+   N. Page-specific styles for standalone pages (services, gallery, about,
+   contact, area pages, privacy).
+   -------------------------------------------------------------------------- */
+.contact-methods { display: flex; flex-wrap: wrap; gap: 14px; }
+.area-hero { display: grid; grid-template-columns: 6fr 5fr; gap: 56px; align-items: center; }
+.area-hero img { border-radius: 8px; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; box-shadow: 0 22px 46px -22px rgba(23,45,54,.45); }
+.area-hero-copy p { max-width: 58ch; margin-bottom: 14px; }
+.area-hero-copy a { color: var(--teal-800); font-weight: 600; }
+.privacy-copy p { margin-bottom: 16px; color: var(--ink-soft); line-height: 1.6; }
+.privacy-copy h3 { font-size: 1.1rem; color: var(--teal-800); margin: 28px 0 10px; }
+
+/* --------------------------------------------------------------------------
+   15. Service page — page head
    -------------------------------------------------------------------------- */
 .page-head .split {
   display: grid;
