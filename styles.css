@@ -392,6 +392,14 @@ h1, h2, h3 {
   margin-bottom: 6px;
 }
 
+.svc-note {
+  font-size: .82rem;
+  font-style: italic;
+  color: var(--muted, #8fa3ad);
+  margin: -4px 0 0;
+  line-height: 1.45;
+}
+
 /* --------------------------------------------------------------------------
    10. Trust band — four items, no more, no reviews.
    -------------------------------------------------------------------------- */
