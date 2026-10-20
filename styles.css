@@ -754,7 +754,13 @@ h1, h2, h3 {
   border: 1px solid rgba(199, 221, 227, .16);
   border-radius: 8px;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
 }
+.testi-card blockquote { margin: 0; }
+.testi-card .testi-meta { margin-top: auto; }
 .testi-quote {
   font-size: 1.1rem;
   line-height: 1.65;
