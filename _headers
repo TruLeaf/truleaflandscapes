@@ -1,0 +1,44 @@
+# Cloudflare Pages security headers
+# Applied to every path (/*). Cloudflare serves these on each response.
+
+/*
+  # Force HTTPS for a year, including subdomains
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Block the page from being framed (clickjacking)
+  X-Frame-Options: DENY
+
+  # Stop browsers guessing MIME types
+  X-Content-Type-Options: nosniff
+
+  # Only send the referrer to same-origin sites
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Deny access to camera, mic, location and other sensitive APIs
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=(), browsing-topics=()
+
+  # Isolate the page from other origins
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+  # Legacy XSS filter is deprecated; leave it off rather than on
+  X-XSS-Protection: 0
+
+  # Defence in depth. Everything same-origin by default.
+  # 'unsafe-inline' is required for the site's inline styles and its small
+  # inline menu script — there are no external scripts or user inputs.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; media-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+
+# Long-cache immutable assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML must always be revalidated so updates go live immediately
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.xml
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.txt
+  Cache-Control: public, max-age=0, must-revalidate
