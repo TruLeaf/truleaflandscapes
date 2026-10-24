@@ -970,7 +970,6 @@ h1, h2, h3 {
     align-items: flex-start;
     padding: 18px 24px 24px;
     gap: 6px;
-    border-bottom: 1px solid rgba(244, 208, 63, .35);
   }
   .site-header.nav-open .main-nav a { padding: 10px 0; font-size: 1.05rem; }
   .site-header.nav-open .nav-cta {
