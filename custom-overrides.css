@@ -1,0 +1,24 @@
+/* Custom overrides for image sizing and accessibility */
+
+/* Hero: cap the image height on large screens so the headline stays in view. */
+.hero img {
+  max-height: 70vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Ensure gallery images never exceed 400px in height regardless of layout */
+.gallery img, .g-item img {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+/* On small screens let both scale naturally. */
+@media (max-width: 1020px) {
+  .hero img,
+  .gallery img,
+  .g-item img {
+    max-height: none;
+  }
+}
+
