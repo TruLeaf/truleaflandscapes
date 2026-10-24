@@ -870,6 +870,20 @@ h1, h2, h3 {
 }
 .rel-list a span { color: var(--teal-500); font-weight: 500; }
 
+/* Plain (non-link) entries in the service-area list — used where there is no
+   dedicated area page, so surrounding towns stay an indicator rather than a
+   promoted destination. */
+.rel-list .rel-item {
+  display: flex;
+  align-items: center;
+  padding: 18px 22px;
+  background: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--teal-800);
+  box-shadow: 0 10px 26px -18px rgba(23, 45, 54, .3);
+}
+
 /* --------------------------------------------------------------------------
    16b. Reviews — one rotating row per platform.
        Each platform shows its own total review count and average stars, and
