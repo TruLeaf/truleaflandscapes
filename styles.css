@@ -201,7 +201,6 @@ h1, h2, h3 {
   top: 0;
   z-index: 60;
   background: var(--teal-800);
-  border-bottom: 1px solid rgba(244, 208, 63, .35);
 }
 .site-header .wrap {
   display: flex;
@@ -870,6 +869,72 @@ h1, h2, h3 {
   box-shadow: 0 16px 32px -18px rgba(23, 45, 54, .38);
 }
 .rel-list a span { color: var(--teal-500); font-weight: 500; }
+
+/* --------------------------------------------------------------------------
+   16b. Reviews — one rotating row per platform.
+       Each platform shows its own total review count and average stars, and
+       cycles through that platform's own reviews.
+   -------------------------------------------------------------------------- */
+.rev-platform { margin-top: 52px; }
+.rev-platform:first-of-type { margin-top: 36px; }
+
+.rev-platform-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(12, 61, 78, .14);
+}
+.rev-platform-head h3 {
+  margin: 0;
+  font-size: 1.28rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--teal-800);
+}
+.rev-stars { color: var(--gold); font-size: 1.02rem; letter-spacing: 3px; }
+.rev-stars em { font-style: normal; color: var(--teal-500); letter-spacing: 0; font-size: .88rem; margin-left: 8px; }
+.rev-count { margin-left: auto; font-size: .88rem; color: var(--teal-500); }
+
+.rev-rotator { margin-top: 22px; }
+.rev-card {
+  margin: 0;
+  padding: 26px 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px -20px rgba(12, 61, 78, .35);
+}
+.rev-card p {
+  margin: 0 0 14px;
+  font-size: 1.07rem;
+  line-height: 1.62;
+  color: var(--ink);
+}
+.rev-card footer { font-size: .9rem; color: var(--teal-500); }
+.rev-note { color: var(--teal-500); font-size: .86em; }
+
+/* Rotation: without JS every card stacks (so search engines and screen readers
+   still see every review); with JS only the active card is shown. */
+.js .rev-card { display: none; }
+.js .rev-card.is-active { display: block; animation: rev-in 480ms var(--ease); }
+@keyframes rev-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.rev-more {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--teal-700);
+  text-decoration: none;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 2px;
+  transition: color 160ms var(--ease);
+}
+.rev-more:hover { color: var(--teal-500); }
 
 /* --------------------------------------------------------------------------
    17. Responsive — 1920 down to 360, no horizontal overflow at any width.
