@@ -29,12 +29,25 @@
   # inline menu script — there are no external scripts or user inputs.
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; media-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
 
-# Long-cache immutable assets
-/assets/*
+# Fonts are content-stable, so cache them hard.
+/assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-# HTML must always be revalidated so updates go live immediately
+# Everything else under /assets (images, logos) must be revalidated so a
+# replaced image reaches returning visitors immediately instead of after a year.
+/assets/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# HTML and CSS/JS must always be revalidated so updates go live immediately.
+# max-age=0 + must-revalidate means the browser/CDN sends a conditional request
+# and gets a 304 with no body when nothing changed — no bandwidth cost.
 /*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.js
   Cache-Control: public, max-age=0, must-revalidate
 
 /*.xml
