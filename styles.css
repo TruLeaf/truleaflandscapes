@@ -222,7 +222,7 @@ h1, h2, h3 {
   border-bottom: 2px solid transparent;
   transition: color 160ms var(--ease), border-color 160ms var(--ease);
 }
-.main-nav a:hover { color: #fff; border-bottom-color: var(--gold); }
+.main-nav a:hover { color: #fff; border-bottom-color: transparent; }
 
 .header-actions { display: flex; align-items: center; gap: 16px; flex: 0 0 auto; }
 .header-phone {
