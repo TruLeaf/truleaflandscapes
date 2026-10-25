@@ -45,6 +45,32 @@
   ]
 }
 </script>
+
+<style>
+  .review-carousel { position: relative; max-width: 820px; margin: 0 auto; }
+  .carousel-track { display: flex; transition: transform 0.5s ease; }
+  .carousel-slide { flex: 0 0 100%; display: flex; align-items: center; justify-content: center; padding: 32px 24px; }
+  .carousel-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: var(--teal-800); color: #fff; border: 2px solid transparent;
+    border-radius: 50%; width: 46px; height: 46px; font-size: 1.5rem;
+    line-height: 1; cursor: pointer; z-index: 10; -webkit-tap-highlight-color: transparent;
+  }
+  .carousel-btn:hover { background: var(--gold); color: var(--teal-800); border-color: transparent; }
+  .carousel-prev { left: 10px; } .carousel-next { right: 10px; }
+  .carousel-dots { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.55); border: 2px solid rgba(255,255,255,0.9); cursor: pointer; transition: all 0.3s; padding: 0; }
+  .dot.active { background: #fff; border-color: #fff; width: 28px; border-radius: 6px; }
+  .dot:hover { background: #fff; border-color: #fff; transform: scale(1.15); }
+  .carousel-controls { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; z-index: 10; }
+  .carousel-controls .card { background: rgba(6,10,18,0.78); backdrop-filter: blur(6px); padding: 10px 16px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; gap: 10px; }
+  .carousel-controls .prev, .carousel-controls .next { background: transparent; border: none; color: #fff; font-size: 1.3rem; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .carousel-controls .prev:hover, .carousel-controls .next:hover { background: rgba(255,255,255,0.15); }
+  .carousel-controls .dots { display: flex; gap: 8px; }
+  .carousel-controls .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); border: 2px solid rgba(255,255,255,0.7); cursor: pointer; transition: all 0.3s; padding: 0; }
+  .carousel-controls .dot.active { background: #fff; border-color: #fff; width: 24px; border-radius: 6px; }
+  .carousel-controls .dot:hover { background: #fff; border-color: #fff; }
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -95,7 +121,7 @@
     <div class="rel-list">
       <a href="https://www.facebook.com/111097840664886">Facebook <span>Read reviews on Facebook →</span></a>
       <a href="https://hipages.com.au/connect/truleaflandscapes">hipages <span>Read reviews on hipages →</span></a>
-      <a href="https://www.google.com/maps/place/TruLeaf+Landscapes/data=!4m2!3m1!1s0x0:0x197ed886f878c52f">Google Business Profile <span>Read reviews on Google →</span></a>
+      <a href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile <span>Read reviews on Google →</span></a>
       <a href="https://www.instagram.com/truleaflandscapes/">Instagram <span>Read reviews on Instagram →</span></a>
 </div>
   </div>
@@ -114,6 +140,55 @@
 
 
 
+
+
+<!-- Reviews Carousel -->
+<section class="band band-light2">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>What our clients say</h2>
+      <p class="lead">Two verified 5-star reviews from our Google Business Profile.</p>
+    </div>
+    <div class="review-carousel">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <blockquote class="testi-quote">
+              "Garden design work in her backyard. She had other quotes that were more than double Matt's quote."
+            </blockquote>
+            <figcaption class="testi-meta">
+              <span class="testi-author">Anne Cullen</span>
+              <span class="testi-source">via Google</span>
+            </figcaption>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <blockquote class="testi-quote">
+              "Recommends &lsquo;Matt&rsquo;s services from Roots N All Garden Solutions.&rsquo;"
+            </blockquote>
+            <figcaption class="testi-meta">
+              <span class="testi-author">Jamie</span>
+              <span class="testi-source">via Google</span>
+            </figcaption>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="card">
+          <button class="prev" aria-label="Previous review">‹</button>
+          <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+          </div>
+          <button class="next" aria-label="Next review">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="band band-orange cta-band" id="contact">
   <div class="wrap">
     <h2>Got a garden job you want sorted?</h2>
@@ -130,7 +205,7 @@
   <p class="social-block-title">Social links</p>
   <div class="social-row">
     <a class="social-card" href="https://www.facebook.com/111097840664886">Facebook</a>
-    <a class="social-card" href="https://www.google.com/maps/place/TruLeaf+Landscapes/data=!4m2!3m1!1s0x0:0x197ed886f878c52f">Google Business Profile</a>
+    <a class="social-card" href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a>
     <a class="social-card" href="https://www.instagram.com/truleaflandscapes/">Instagram</a>
   </div>
 </div>
@@ -157,7 +232,7 @@
         <ul>
           <li><a href="https://www.facebook.com/111097840664886">Facebook</a></li>
           <li><a href="https://www.instagram.com/truleaflandscapes/">Instagram</a></li>
-          <li><a href="https://www.google.com/maps/place/TruLeaf+Landscapes/data=!4m2!3m1!1s0x0:0x197ed886f878c52f">Google Business Profile</a></li>
+          <li><a href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a></li>
         </ul>
       </div>
     </div>
@@ -168,5 +243,46 @@
     </div>
   </div>
 </footer>
+
+<script>
+  (function() {
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-controls .dot');
+    const prevBtn = document.querySelector('.carousel-controls .prev');
+    const nextBtn = document.querySelector('.carousel-controls .next');
+    let current = 0;
+    const autoSlide = setInterval(() => {
+      current = (current + 1) % slides.length;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    }, 7000);
+    dots.forEach(function(d, i) {
+      d.addEventListener('click', function() {
+        current = i;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function(dot, idx) { dot.classList.toggle('active', idx === current); });
+      });
+    });
+    prevBtn.addEventListener('click', function() {
+      current = (current - 1 + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(dot, idx) { dot.classList.toggle('active', idx === current); });
+    });
+    nextBtn.addEventListener('click', function() {
+      current = (current + 1) % slides.length;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(dot, idx) { dot.classList.toggle('active', idx === current); });
+    });
+    // Pause on hover
+    const carousel = document.querySelector('.review-carousel');
+    carousel.addEventListener('mouseenter', function() { clearInterval(autoSlide); });
+    carousel.addEventListener('mouseleave', function() { autoSlide = setInterval(function() {
+      current = (current + 1) % slides.length;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    }, 7000); });
+  })();
+</script>
 </body>
 </html>
