@@ -22,6 +22,72 @@
 <link rel="preload" href="assets/fonts/spectral-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/libre-franklin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQ600CHMN6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YQ600CHMN6');
+</script>
+<script>
+  /* GA4 event tracking
+     Events:
+       - generate_lead : "Text a photo" (SMS) + Call (tel) buttons
+       - submit_form   : contact/quote form submitted
+       - view_project  : portfolio / service pages opened
+       - page_view     : native pageview (pushed automatically by gtag('config'))
+  */
+
+  // --- generate_lead: "Text a photo" (SMS) + Call (tel) --------------------
+  document.addEventListener('click', function (e) {
+    var target = (e && e.target) || null;
+    if (!target) return;
+    var href = null;
+    if (typeof target.getAttribute === 'function') { href = target.getAttribute('href'); }
+    if (!href) return;
+
+    var method = null;
+    if (/^sms:/.test(href)) { method = 'SMS'; }
+    else if (/^tel:/.test(href)) { method = 'phone'; }
+    else if (/^mailto:/.test(href)) { method = 'email'; }
+    else return;
+
+    gtag('event', 'generate_lead', {
+      cta: (method === 'SMS' ? 'text_a_photo' : (method === 'phone' ? 'phone_call' : 'email')),
+      method: method
+    });
+  }, true);
+
+  // --- submit_form: contact/quote form submitted ---------------------------
+  document.addEventListener('submit', function (e) {
+    var form = (e && e.target) || null;
+    if (!form || form.nodeName !== 'FORM') return;
+    gtag('event', 'submit_form', {
+      form_name: (typeof form.getAttribute === 'function' ? form.getAttribute('data-form-name') : '') ||
+                 (typeof form.name === 'string' ? form.name : ''),
+      form_id: (typeof form.id === 'string' ? form.id : '')
+    });
+  });
+
+  // --- view_project: portfolio / service pages -----------------------------
+  (function () {
+    var path = '';
+    if (typeof window !== 'undefined' && window.location && window.location.pathname) {
+      path = window.location.pathname;
+    }
+    var normalized = path.replace(/\.html$/, '');
+    var projectPages = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|property-cleanups-garden-makeovers|retaining-walls-paving|stump-grinding|garden-design-landscaping-turf|service-areas|gallery)(\/)?$/;
+    if (projectPages.test(normalized)) {
+      gtag('event', 'view_project', { project_id: normalized.replace(/\.html$/, '') });
+    }
+  })();
+
+  // --- page_view : native — pushed automatically by gtag('config') ---------
+</script>
+
+
+
 </head>
 <body>
 <header class="site-header">
