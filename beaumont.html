@@ -218,5 +218,36 @@
     </div>
   </div>
 </footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
+
+  var menuBtn = document.querySelector('.hamburger');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () {
+      var h = document.querySelector('.site-header');
+      var open = h.classList.toggle('nav-open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body>
 </html>
