@@ -1094,6 +1094,35 @@ h1, h2, h3 {
 }
 .rev-more:hover { color: var(--teal-500); }
 
+.rev-viewport { position: relative; }
+.rev-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(12, 61, 78, .18);
+  background: #fff;
+  color: var(--teal-800);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px -10px rgba(12, 61, 78, .35);
+  transition: background 160ms var(--ease), color 160ms var(--ease), transform 160ms var(--ease);
+}
+.rev-btn:hover { background: var(--teal-800); color: #fff; }
+.rev-btn:active { transform: translateY(-50%) scale(0.97); }
+.rev-btn.prev { left: -8px; }
+.rev-btn.next { right: -8px; }
+@media (max-width: 860px) {
+  .rev-btn.prev { left: 4px; }
+  .rev-btn.next { right: 4px; }
+}
+
 /* --------------------------------------------------------------------------
    17. Responsive — 1920 down to 360, no horizontal overflow at any width.
    -------------------------------------------------------------------------- */
