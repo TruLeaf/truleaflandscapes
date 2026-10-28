@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Choose the Right Landscaping Company | TruLeaf Landscapes</title>
+<meta name="description" content="A practical guide to choosing the right landscaping company in Kangaroo Valley. Learn what to look for in a contractor and why experience matters.">
+<meta property="og:title" content="How to Choose the Right Landscaping Company">
+<meta property="og:description" content="A practical guide to choosing the right landscaping company in Kangaroo Valley, NSW. Learn what to look for and why experience matters.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://truleaflandscapes.com/blog/how-to-choose-a-landscaping-company.html">
+<meta property="og:image" content="https://truleaflandscapes.com/assets/img/hero-bush-retreat.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://truleaflandscapes.com/blog/how-to-choose-a-landscaping-company.html">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../index"><img src="../assets/logo-header.png" alt="TruLeaf"></a>
+    <button class="hamburger" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <nav class="main-nav">
+      <a href="../index">Home</a><a href="../services">Services</a><a href="../blog/">Blog</a><a href="../contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <article class="blog-post">
+    <h1>How to Choose the Right Landscaping Company</h1>
+    <p class="meta">By TruLeaf Landscapes &nbsp;·&nbsp; 4 min read</p>
+    <img src="../assets/img/hero-bush-retreat.jpg" alt="Choosing a landscaping company in Kangaroo Valley">
+    <p>Choosing a landscaping company is a significant decision. The right contractor will deliver quality work, meet your budget, and leave you with a space you love. Here is what to look for when choosing a landscaping company in Kangaroo Valley.</p>
+    <h2>1. Check Reviews and References</h2>
+    <p>Look for reviews on Google, Hipages, and social media. Ask for references from previous clients. A reputable company will be happy to share examples of their work and talk about their experience.</p>
+    <h2>2. Verify Insurance and Licences</h2>
+    <p>Ensure the company is fully insured with public liability coverage and that workers are trained and screened. This protects you and the property from accidents or damage.</p>
+    <h2>3. Get Multiple Quotes</h2>
+    <p>Don't settle for the first quote. Compare prices and see how each company approaches your project. A detailed quote should include the scope of work, materials, timeline, and payment schedule.</p>
+    <h2>4. Ask About Local Experience</h2>
+    <p>A company familiar with Kangaroo Valley's soil, climate, and access constraints will deliver better results. They will know what works and what doesn't in your specific area.</p>
+    <h2>5. Check for Clear Communication</h2>
+    <p>You want a company that communicates clearly, keeps you informed, and is easy to reach. Ask questions and make sure they understand your vision.</p>
+    <div class="cta-band">
+      <div class="wrap">
+        <h2>Need a landscaping company?</h2>
+        <p>Contact TruLeaf for a free, no-obligation quote.</p>
+        <a class="btn btn-orange" href="sms:+61423325989">Text a photo</a>
+      </div>
+    </div>
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-content">
+      <div class="footer-brand"><a href="../index"><img src="../assets/logo-footer.png" alt="TruLeaf"></a><p>Landscaping in Kangaroo Valley and the Shoalhaven region.</p></div>
+      <div class="footer-links"><a href="../services">Lawn Mowing</a><a href="../services">Garden Maintenance</a><a href="../services">Garden Design</a><a href="../services">Retaining Walls</a></div>
+      <div class="footer-contact"><h4>Contact</h4><p>0423 325 989</p><p><a href="mailto:info@truleaflandscapes.com">info@truleaflandscapes.com</a></p><p><a href="sms:+61423325989">Text a photo</a></p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 TruLeaf Landscapes. All rights reserved.</p></div>
+  </div>
+</footer>
+</body>
+</html>

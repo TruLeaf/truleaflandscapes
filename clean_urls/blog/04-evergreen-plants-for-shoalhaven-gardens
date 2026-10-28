@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evergreen Plants for Shoalhaven Gardens | TruLeaf Landscapes</title>
+<meta name="description" content="Discover the best evergreen plants for Shoalhaven gardens. Learn about native and exotic evergreens that thrive in Kangaroo Valley's climate.">
+<meta property="og:title" content="Evergreen Plants for Shoalhaven Gardens">
+<meta property="og:description" content="Discover the best evergreen plants for Shoalhaven gardens, including native species that thrive in Kangaroo Valley's climate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://truleaflandscapes.com/blog/evergreen-plants-for-shoalhaven-gardens.html">
+<meta property="og:image" content="https://truleaflandscapes.com/assets/img/hero-bush-retreat.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://truleaflandscapes.com/blog/evergreen-plants-for-shoalhaven-gardens.html">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="../index"><img src="../assets/logo-header.png" alt="TruLeaf"></a>
+    <button class="hamburger" aria-label="Open menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <nav class="main-nav">
+      <a href="../index">Home</a><a href="../services">Services</a><a href="../blog/">Blog</a><a href="../contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <article class="blog-post">
+    <h1>Evergreen Plants for Shoalhaven Gardens</h1>
+    <p class="meta">By TruLeaf Landscapes &nbsp;·&nbsp; 4 min read</p>
+    <img src="../assets/img/hero-bush-retreat.jpg" alt="Evergreen plants for Shoalhaven gardens">
+    <p>Evergreen plants are the backbone of a healthy, year-round garden. In Kangaroo Valley and the Shoalhaven, they provide essential year-round structure, shade, and habitat for local wildlife. Here is what to plant for a vibrant evergreen garden that thrives in our climate.</p>
+    <h2>Why Evergreen Plants Matter</h2>
+    <p>Evergreen plants provide structure and continuity in a garden. While deciduous plants lose their leaves in winter, evergreens keep their foliage, ensuring your garden looks good all year. They also provide year-round shade, wind protection, and habitat for native wildlife.</p>
+    <h2>Native Evergreens for the Shoalhaven</h2>
+    <p>Native plants are well-adapted to the local climate and soil. Good choices include <em>Westringia</em> (coastal rosemary), <em>Banksia</em>, <em>Grevillea</em>, <em>Lemon Scented Tea Tree</em>, and <em>Callistemon</em> (bottlebrush). These plants are drought-tolerant once established and provide food and habitat for native wildlife.</p>
+    <h2>Exotic Evergreens for Structure</h2>
+    <p>Exotic evergreens like <em>Lavandula</em>, <em>Rosmarinus officinalis</em> (rosemary), <em>Buxus</em>, and <em>Pittosporum</em> provide structure and form. They are ideal for hedging, topiary, and garden borders. Many are drought-tolerant and low-maintenance once established.</p>
+    <h2>Tips for Planting Evergreens</h2>
+    <p>Plant in well-drained soil, mulch heavily to retain moisture, and water regularly until established. Group plants with similar water and light requirements together. Ensure good air circulation to prevent fungal issues.</p>
+    <div class="cta-band">
+      <div class="wrap">
+        <h2>Planning your garden?</h2>
+        <p>Contact us for expert garden design and planting advice.</p>
+        <a class="btn btn-orange" href="sms:+61423325989">Text a photo</a>
+      </div>
+    </div>
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-content">
+      <div class="footer-brand"><a href="../index"><img src="../assets/logo-footer.png" alt="TruLeaf"></a><p>Landscaping in Kangaroo Valley and the Shoalhaven region.</p></div>
+      <div class="footer-links"><a href="../services">Lawn Mowing</a><a href="../services">Garden Maintenance</a><a href="../services">Garden Design</a><a href="../services">Retaining Walls</a></div>
+      <div class="footer-contact"><h4>Contact</h4><p>0423 325 989</p><p><a href="mailto:info@truleaflandscapes.com">info@truleaflandscapes.com</a></p><p><a href="sms:+61423325989">Text a photo</a></p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 TruLeaf Landscapes. All rights reserved.</p></div>
+  </div>
+</footer>
+</body>
+</html>
