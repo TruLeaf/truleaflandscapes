@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TruLeaf Landscapes | Landscaping in Kangaroo Valley</title>
+<meta name="description" content="TruLeaf Landscapes — lawn mowing, garden maintenance, landscaping and property work in Kangaroo Valley. Text a photo for a free quote."
+<meta property="og:title" content="TruLeaf Landscapes | Landscaping in Kangaroo Valley">
+<meta property="og:description" content="TruLeaf Landscapes — lawn mowing, garden maintenance, landscaping and property work in Kangaroo Valley. Text a photo for a free quote.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://truleaflandscapes.com/">
+<meta property="og:image" content="https://truleaflandscapes.com/assets/img/hero-bush-retreat.jpg">
+<meta property="og:site_name" content="TruLeaf Landscapes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TruLeaf Landscapes | Landscaping in Kangaroo Valley">
+<meta name="twitter:description" content="TruLeaf Landscapes looks after gardens across Kangaroo Valley and the surrounding area — mowing, planting, building and maintaining. Every photo on this site is a real job. Text a photo for a quote.">
+<link rel="canonical" href="https://truleaflandscapes.com/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0C3D4E">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/spectral-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/libre-franklin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="custom-overrides.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQ600CHMN6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YQ600CHMN6');
+</script>
+<script>
+  /* GA4 event tracking
+     Events:
+       - generate_lead : "Text a photo" (SMS) + Call (tel) buttons
+       - submit_form   : contact/quote form submitted
+       - view_project  : portfolio / service pages opened
+       - page_view     : native pageview (pushed automatically by gtag('config'))
+  */
+
+  // --- generate_lead: "Text a photo" (SMS) + Call (tel) --------------------
+  document.addEventListener('click', function (e) {
+    var target = (e && e.target) || null;
+    if (!target) return;
+    var href = null;
+    if (typeof target.getAttribute === 'function') { href = target.getAttribute('href'); }
+    if (!href) return;
+
+    var method = null;
+    if (/^sms:/.test(href)) { method = 'SMS'; }
+    else if (/^tel:/.test(href)) { method = 'phone'; }
+    else if (/^mailto:/.test(href)) { method = 'email'; }
+    else return;
+
+    gtag('event', 'generate_lead', {
+      cta: (method === 'SMS' ? 'text_a_photo' : (method === 'phone' ? 'phone_call' : 'email')),
+      method: method
+    });
+  }, true);
+
+  // --- submit_form: contact/quote form submitted ---------------------------
+  document.addEventListener('submit', function (e) {
+    var form = (e && e.target) || null;
+    if (!form || form.nodeName !== 'FORM') return;
+    gtag('event', 'submit_form', {
+      form_name: (typeof form.getAttribute === 'function' ? form.getAttribute('data-form-name') : '') ||
+                 (typeof form.name === 'string' ? form.name : ''),
+      form_id: (typeof form.id === 'string' ? form.id : '')
+    });
+  });
+
+  // --- view_project: portfolio / service pages -----------------------------
+  (function () {
+    var path = '';
+    if (typeof window !== 'undefined' && window.location && window.location.pathname) {
+      path = window.location.pathname;
+    }
+    var normalized = path.replace(/\.html$/, '');
+    var projectPages = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|property-cleanups-garden-makeovers|retaining-walls-paving|stump-grinding|garden-design-landscaping-turf|service-areas|gallery)(\/)?$/;
+    if (projectPages.test(normalized)) {
+      gtag('event', 'view_project', { project_id: normalized.replace(/\.html$/, '') });
+    }
+  })();
+
+  // --- page_view : native — pushed automatically by gtag('config') ---------
+</script>
+
+
+
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="TruLeaf Landscapes — home">
+      <img src="assets/logo-header.png" alt="TruLeaf Landscapes logo">
+    </a>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="main-nav" id="mainnav" aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/gallery">Our Work</a>
+      <a href="/about">About</a>
+      <a href="/kangaroo-valley">Kangaroo Valley</a>
+      <a href="/service-areas">Service Areas</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/contact">Contact</a>
+      <a class="nav-cta" href="sms:0423325989">Text a photo</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="tel:0423325989">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>0423 325 989</span>
+      </a>
+      <a class="btn btn-orange btn-sm" href="sms:0423325989">Text a photo</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <img class="hero-img" src="assets/img/hero-bush-retreat.jpg" alt="A landscaped garden bed and stone path at the Bush Retreat in Kangaroo Valley, with mountain views behind" width="1920" height="1440" fetchpriority="high" decoding="async">
+  <div class="hero-scrim"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <h1>Landscaping in Kangaroo Valley &amp; the surrounding area</h1>
+      <p class="hero-sub">We design, build, plant and maintain gardens across Kangaroo Valley and the surrounding area.
+        Every photo on this site is a job we’ve completed — and most are gardens we still care for today.</p>
+      <div class="cta-row">
+        <a class="btn btn-orange" href="sms:0423325989">Text a photo</a>
+        <a class="btn btn-ghost" href="tel:0423325989">Call 0423 325 989</a>
+      </div>
+      <p class="hero-note"><strong>We're usually out of reception while we're working.</strong> Texting a photo is the fastest way to get a quote, so we'll get back to you the same day.</p>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- ============================ WHAT WE DO ============================ -->
+<section class="band band-light" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>What we do</h2>
+      <p class="lead">From a weekly mow to a full property makeover. We do the mowing, the planting, the building and the tidying, so you don't have to line up three different trades.</p>
+    </div>
+
+    <div class="svc-grid">
+
+      <article class="svc-card">
+        <a class="ph" href="/lawn-mowing-lawn-care" aria-label="Lawn Mowing &amp; Lawn Care — see details">
+          <img src="assets/img/lawn-mowing.jpg" alt="A lush, evenly mown lawn with clean edges beside a garden bed and a trimmed hedge" width="1500" height="1125" loading="lazy" decoding="async">
+        </a>
+        <div class="svc-body">
+          <h3>Lawn Mowing &amp; Lawn Care</h3>
+          <p>A well-maintained lawn makes the whole property look cared for. We mow, edge and tidy, with regular visits or one-off services available.</p>
+          <a class="svc-link" href="/lawn-mowing-lawn-care">Learn more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <a class="ph" href="/garden-maintenance-upkeep" aria-label="Garden Maintenance &amp; Upkeep — see details">
+          <img src="assets/img/garden-maintenance.jpg" alt="A garden bed freshly tidied and mulched, with a clean edge against the lawn" width="1500" height="1125" loading="lazy" decoding="async">
+        </a>
+        <div class="svc-body">
+          <h3>Garden Maintenance &amp; Upkeep</h3>
+          <p>From a monthly tidy-up to more regular care, we handle the maintenance that keeps your garden attractive, healthy and easy to manage.</p>
+          <a class="svc-link" href="/garden-maintenance-upkeep">Learn more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <a class="ph" href="/hedging-pruning-tree-care" aria-label="Hedging, Pruning &amp; Tree Care — see details">
+          <img src="assets/img/hedging-pruning.jpg" alt="A tall hedge after a hard reduction prune, squared off at the top" width="1100" height="1461" loading="lazy" decoding="async">
+        </a>
+        <div class="svc-body">
+          <h3>Hedging, Pruning &amp; Tree Care</h3>
+          <p>We shape hedges, prune shrubs and carry out tree work with an eye for both appearance and plant health. We’ll also give honest advice about timing and what can wait.</p>
+          <a class="svc-link" href="/hedging-pruning-tree-care">Learn more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <a class="ph" href="/garden-design-landscaping-turf" aria-label="Garden Design, Landscaping &amp; Turf — see details">
+          <img src="assets/img/work-wide.jpg" alt="A paved path winding through native garden beds and rock outcrops beside a home" width="1600" height="1200" loading="lazy" decoding="async">
+        </a>
+        <div class="svc-body">
+          <h3>Garden Design, Landscaping &amp; Turf</h3>
+          <p>From a full landscape design to a simple lawn and planting upgrade, we create outdoor spaces that suit your site, soil and lifestyle.</p>
+          <a class="svc-link" href="/garden-design-landscaping-turf">Learn more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <a class="ph" href="/retaining-walls-paving" aria-label="Retaining Walls &amp; Paving — see details">
+          <img src="assets/img/retaining-walls-paving.jpg" alt="A newly built block retaining wall with underground drainage at its base" width="1500" height="1125" loading="lazy" decoding="async">
+        </a>
+        <div class="svc-body">
+          <h3>Retaining Walls &amp; Paving</h3>
+          <p>We build retaining walls and paved areas with attention to drainage, stability and the way the space will actually be used.</p>
+          <a class="svc-link" href="/retaining-walls-paving">Learn more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <a class="ph" href="/irrigation-drainage" aria-label="Irrigation &amp; Drainage — see details">
+          <img src="assets/img/irrigation-drainage.jpg" alt="A driveway drain installation with ag-pipe and a gravel trench" width="1600" height="1200" loading="lazy" decoding="async">
+        </a>
+        <div class="svc-body">
+          <h3>Irrigation &amp; Drainage</h3>
+          <p>From water wise sprinklers and drip lines to drainage solutions, we help manage water around your property before it becomes a bigger problem.</p>
+          <a class="svc-link" href="/irrigation-drainage">Learn more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="svc-card solid">
+        <div class="svc-icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-2.5 4-2.5 6 0s4 2.5 6 0 4-2.5 6 0"/><path d="M2 17c2-2.5 4-2.5 6 0s4 2.5 6 0 4-2.5 6 0"/><path d="M2 7c2-2.5 4-2.5 6 0s4 2.5 6 0 4-2.5 6 0"/></svg>
+        </div>
+        <span class="svc-tag">Photo coming soon</span>
+        <div class="svc-body">
+          <h3>Ponds &amp; Water Features</h3>
+          <p>We design and construct ponds, water features and aquaponics systems that add interest to a garden without creating an ongoing maintenance headache.</p>
+          <a class="svc-link" href="/ponds-water-features">Learn more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <a class="ph" href="/property-cleanups-garden-makeovers" aria-label="Property Clean-ups &amp; Garden Makeovers — see details">
+          <img src="assets/img/property-cleanups.jpg" alt="A cleared and tidied garden after a property clean-up" width="1500" height="1125" loading="lazy" decoding="async">
+        </a>
+        <div class="svc-body">
+          <h3>Property Clean-ups &amp; Garden Makeovers</h3>
+          <p>We restore gardens and properties that have got away, creating a clean base for ongoing maintenance, planting or landscaping.</p>
+          <a class="svc-link" href="/property-cleanups-garden-makeovers">Learn more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <a class="ph" href="/stump-grinding" aria-label="Stump Grinding — see details">
+          <img src="assets/img/work-stump-grinding.jpg" alt="A stump grinder cutting a stump down to ground level, throwing wood chips" width="1500" height="2000" loading="lazy" decoding="async">
+        </a>
+        <div class="svc-body">
+          <h3>Stump Grinding</h3>
+          <p>Remove the obstacle, reclaim the space. We grind stumps and prepare the area for new turf, planting or further landscaping.</p>
+          <a class="svc-link" href="/stump-grinding">Learn more
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================= WHY CHOOSE TRULEAF ========================= -->
+<section class="band band-dark" id="trust">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Why choose TruLeaf</h2></div>
+    <div class="trust-grid">
+
+      <div class="trust-item reveal">
+        <div class="t-icon" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-4 3-8 9-9 4.5-.8 7 1 7 1s-.5 9-5 13c-2 1.7-4 2-4 2z"/><path d="M4 21c4-4 8-8 12-11"/></svg>
+        </div>
+        <h3>Local experience</h3>
+        <p>We work Kangaroo Valley soil and the local climate every week. We know what grows here and what doesn't, which saves you buying plants that were never going to make it.</p>
+      </div>
+
+      <div class="trust-item reveal">
+        <div class="t-icon" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <h3>Real work, real photos</h3>
+        <p>Every photo on this site is a job we finished. There's no stock imagery here, and we don't plan on any.</p>
+      </div>
+
+      <div class="trust-item reveal">
+        <div class="t-icon" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3>Fully insured</h3>
+        <p>We're fully insured, and we'll talk you through what we're doing before we start. No surprises once we're underway.</p>
+      </div>
+
+      <div class="trust-item reveal">
+        <div class="t-icon" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Honest quoting</h3>
+        <p>We quote on what the job actually takes, not on what we think you'll pay. If there's a cheaper way to get the result you want, we'll tell you.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ WHERE WE WORK ============================ -->
+<section class="band band-light" id="areas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Where we work</h2>
+      <p class="lead">We work with our trade connections right here in Kangaroo Valley. If we can't fit you in, we'll point you to someone who can.</p>
+    </div>
+    <div class="area-grid">
+
+      <article class="area-card reveal">
+        <img src="assets/img/area-kangaroo-valley.jpg" alt="A mulched garden bed with native plantings on a Kangaroo Valley property" width="1100" height="1467" loading="lazy" decoding="async">
+        <div class="area-body">
+          <span class="a-kicker">Core area</span>
+          <h3>Kangaroo Valley</h3>
+          <p>Based in the valley. We work Kangaroo Valley and the surrounding districts, from village blocks to hobby farms and acreage.</p>
+          <a class="area-link" href="#services">See Kangaroo Valley services
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="area-card reveal">
+        <img src="assets/img/area-surrounds.jpg" alt="A dry-stone wall beside a gravel driveway on a property near Kangaroo Valley" width="1500" height="1125" loading="lazy" decoding="async">
+        <div class="area-body">
+          <span class="a-kicker">Surrounding area</span>
+          <h3>Surrounding area</h3>
+          <p>We work with our trade connections right here in Kangaroo Valley. If we can’t fit you in, we’ll point you to someone who can.</p>
+          <a class="area-link" href="#services">See surrounding area services
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================= MEET MATHEW ============================= -->
+<section class="band band-tint" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+
+      <!-- PLACEHOLDER: Mathew's own portrait. He is supplying the photograph.
+           Until then the slot shows a marked "Photo coming soon". -->
+      <figure class="about-photo reveal about-photo--placeholder">
+        <div class="ph-empty" aria-hidden="true">
+          <span class="ph-mark"></span>
+          <span class="ph-text">Photo coming soon</span>
+        </div>
+        <figcaption>Mathew McLean — TruLeaf Landscapes</figcaption>
+      </figure>
+
+      <div class="about-copy reveal">
+        <h2>Meet Mathew</h2>
+        <p><strong>I'm Mathew McLean,</strong> and I run TruLeaf Landscapes out of Kangaroo Valley. I've spent 18+ years in horticulture and landscaping, across the Gold Coast, the Mid North Coast and now here.</p>
+        <p>I started TruLeaf because I wanted to work with gardens, not against them. Permaculture taught me to look at what a place wants to be — the soil, the water, the aspect, the plants that already want to grow there.</p>
+        <p>That's the work I love. I'd rather plant something that's still thriving for you in ten years than something that looks good for a week. And I'd rather quote you honestly for what a job takes than pad it out.</p>
+        <p>If there's something outside what I do, I'll point you to a Kangaroo Valley tradesperson I know and trust to do it properly.</p>
+        <p>When I'm not working I'm in the garden, or out on the water. I care about how a place feels, not just how it looks on the day we finish.</p>
+        <p>We're fully insured, we turn up when we say we will, and we leave the place tidy.</p>
+        <a class="txt-link" href="#contact">Get in touch</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================= RECENT WORK ============================= -->
+<section class="band band-dark" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Recent work</h2>
+      <p class="lead">Real jobs from around the valley and the region, and more photos land here as jobs are finished.</p>
+    </div>
+
+    <div class="gallery">
+      <figure class="g-item g-a reveal">
+        <img src="assets/img/work-courtyard.jpg" alt="A modern courtyard with golden Japanese maples in dark planters beside a paved terrace and lawn" width="2000" height="1500" loading="lazy" decoding="async">
+        <figcaption>Courtyard planting, paving and lawn</figcaption>
+      </figure>
+      <figure class="g-item g-b reveal">
+        <img src="assets/img/work-tall.jpg" alt="A tall hedge after shaping, squared off and cleaned up" width="1000" height="1328" loading="lazy" decoding="async">
+        <figcaption>Hedge shaping, cut back hard and squared off</figcaption>
+      </figure>
+      <figure class="g-item g-c reveal">
+        <img src="assets/img/work-lawn-hedge.jpg" alt="A lawn beside a trimmed hedge" width="1200" height="900" loading="lazy" decoding="async">
+        <figcaption>Lawn mow and hedge</figcaption>
+      </figure>
+      <figure class="g-item g-c reveal">
+        <img src="assets/img/work-stump-grinding-gallery.jpg" alt="A stump grinder cutting a stump down to ground level, throwing wood chips" width="900" height="1200" loading="lazy" decoding="async">
+        <figcaption>Stump grinding</figcaption>
+      </figure>
+      <figure class="g-item g-d reveal">
+        <img src="assets/img/work-lawn.jpg" alt="A mown lawn beside a garden bed" width="1200" height="900" loading="lazy" decoding="async">
+        <figcaption>Mown lawn and garden bed</figcaption>
+      </figure>
+      <figure class="g-item g-e reveal">
+        <img src="assets/img/work-driveway.jpg" alt="A section of roadbase and driveway installation" width="1100" height="828" loading="lazy" decoding="async">
+        <figcaption>Roadbase and driveway installation</figcaption>
+      </figure>
+      <figure class="g-item g-f reveal">
+        <img src="assets/img/work-before.jpg" alt="Before shot of an overgrown veggie enclosure ready for a clean-up" width="1600" height="1200" loading="lazy" decoding="async">
+        <span class="g-tag">Before</span>
+        <figcaption>Veggie enclosure clean-up — before</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================ REVIEWS ============================ -->
+<section class="band band-light" id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>What clients say</h2>
+      <p class="lead">Real reviews from the platforms our clients use. Every one is from a real job.</p>
+    </div>
+
+    <!-- ============ hipages ============ -->
+    <div class="rev-platform reveal" itemscope itemtype="https://schema.org/AggregateRating">
+      <div class="rev-platform-head">
+        <h3>hipages</h3>
+        <span class="rev-stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;<em>5.0 average</em></span>
+        <meta itemprop="ratingValue" content="5.0">
+        <meta itemprop="reviewCount" content="11">
+        <span class="rev-count">11 reviews</span>
+      </div>
+      <div class="rev-viewport">
+        <div class="rev-rotator">
+          <button class="rev-btn prev" aria-label="Previous review">&#8592;</button>
+          <button class="rev-btn next" aria-label="Next review">&#8594;</button>
+          <blockquote class="rev-card" itemscope itemtype="https://schema.org/Review">
+            <p>&ldquo;Matt <span class="rev-note">(the proprietor)</span> did the most brilliant job landscaping a problem area. I did not ever think the spot could look so good! Matt was such a pleasure to engage and work with. Brilliant.&rdquo;</p>
+            <footer>Anne C &mdash; <span class="rev-note">via hipages</span></footer>
+          </blockquote>
+          <blockquote class="rev-card" itemscope itemtype="https://schema.org/Review">
+            <p>&ldquo;Polite, punctual and reasonable priced&rdquo;</p>
+            <footer>Glenda F &mdash; <span class="rev-note">via hipages</span></footer>
+          </blockquote>
+          <blockquote class="rev-card" itemscope itemtype="https://schema.org/Review">
+            <p>&ldquo;He was very friendly and very efficient&rdquo;</p>
+            <footer>Rebecca S &mdash; <span class="rev-note">via hipages</span></footer>
+          </blockquote>
+          <blockquote class="rev-card" itemscope itemtype="https://schema.org/Review">
+            <p>&ldquo;Connected with TruLeaf Landscapes and would recommend them&rdquo;</p>
+            <footer>Sally A &mdash; <span class="rev-note">via hipages</span></footer>
+          </blockquote>
+          <blockquote class="rev-card" itemscope itemtype="https://schema.org/Review">
+            <p>&ldquo;Connected with TruLeaf Landscapes and would recommend them&rdquo;</p>
+            <footer>Quoc N &mdash; <span class="rev-note">via hipages</span></footer>
+          </blockquote>
+          <blockquote class="rev-card" itemscope itemtype="https://schema.org/Review">
+            <p>&ldquo;Connected with TruLeaf Landscapes and would recommend them&rdquo;</p>
+            <footer>Mitch R &mdash; <span class="rev-note">via hipages</span></footer>
+          </blockquote>
+        </div>
+      </div>
+      <a class="rev-more" href="https://hipages.com.au/connect/truleaflandscapes">Read all 11 reviews on hipages &rarr;</a>
+    </div>
+
+    <!-- ============ Google ============ -->
+    <div class="rev-platform reveal" itemscope itemtype="https://schema.org/AggregateRating">
+      <div class="rev-platform-head">
+        <h3>Google</h3>
+        <span class="rev-stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;<em>5.0 average</em></span>
+        <meta itemprop="ratingValue" content="5.0">
+        <meta itemprop="reviewCount" content="2">
+        <span class="rev-count">2 reviews</span>
+      </div>
+      <div class="rev-viewport">
+        <div class="rev-rotator">
+          <button class="rev-btn prev" aria-label="Previous review">&#8592;</button>
+          <button class="rev-btn next" aria-label="Next review">&#8594;</button>
+          <blockquote class="rev-card" itemscope itemtype="https://schema.org/Review">
+            <p>&ldquo;Matt <span class="rev-note">(the proprietor)</span> undertook some landscaping for the benefit of my backyard. I did have other quotes that were more than double the amount Matt quoted to me. The other quotes seems extortion for the size of the area to be fixed.&rdquo;</p>
+            <footer>Anne Cullen &mdash; <span class="rev-note">via Google</span></footer>
+          </blockquote>
+          <blockquote class="rev-card" itemscope itemtype="https://schema.org/Review">
+            <p>&ldquo;Highly recommend the services of Matt <span class="rev-note">(the proprietor)</span> from Roots N All Garden Solutions <span class="rev-note">(now trading as TruLeaf Landscapes)</span>. Great service!!!&rdquo;</p>
+            <footer>Jamie &mdash; <span class="rev-note">via Google</span></footer>
+          </blockquote>
+        </div>
+      </div>
+      <a class="rev-more" href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Read reviews on Google &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<script>
+/* Review rotator — one card at a time per platform.
+   Without JS every card stacks (so search engines and screen readers
+   still see every review); with JS only the active card is shown. */
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
+
+  var rotators = document.querySelectorAll('.rev-rotator');
+  var INTERVAL = 8000;
+  var timers = new Map();
+
+  function show(rotator, index) {
+    var cards = rotator.querySelectorAll('.rev-card');
+    var n = cards.length;
+    if (!n) return;
+    index = ((index % n) + n) % n;
+    cards.forEach(function (c, i) { c.classList.toggle('is-active', i === index); });
+    return index;
+  }
+
+  function start(rotator) {
+    var cards = rotator.querySelectorAll('.rev-card');
+    if (cards.length < 2) return;
+    var i = 0;
+    i = show(rotator, i) || i;
+    var viewport = rotator.closest('.rev-viewport');
+    var timer = setInterval(function () { i = show(rotator, i + 1) || i; }, INTERVAL);
+    timers.set(rotator, timer);
+
+    viewport.addEventListener('mouseenter', function () { clearInterval(timer); });
+    viewport.addEventListener('mouseleave', function () {
+      timer = setInterval(function () { i = show(rotator, i + 1) || i; }, INTERVAL);
+      timers.set(rotator, timer);
+    });
+
+    var prev = viewport.querySelector('.rev-btn.prev');
+    var next = viewport.querySelector('.rev-btn.next');
+    if (prev) {
+      prev.addEventListener('click', function () {
+        i = show(rotator, i - 1) || i;
+        resetTimer(rotator);
+      });
+    }
+    if (next) {
+      next.addEventListener('click', function () {
+        i = show(rotator, i + 1) || i;
+        resetTimer(rotator);
+      });
+    }
+  }
+
+  function resetTimer(rotator) {
+    var timer = timers.get(rotator);
+    if (timer) clearInterval(timer);
+    var cards = rotator.querySelectorAll('.rev-card');
+    if (cards.length < 2) return;
+    var i = rotator.querySelector('.rev-card.is-active') ? Array.prototype.indexOf.call(cards, rotator.querySelector('.rev-card.is-active')) : 0;
+    timer = setInterval(function () { i = show(rotator, i + 1) || i; }, INTERVAL);
+    timers.set(rotator, timer);
+  }
+
+  rotators.forEach(start);
+})();
+</script>
+
+</main>
+
+<section class="band band-orange cta-band" id="contact">
+  <div class="wrap">
+    <h2>Got a garden job you want sorted?</h2>
+    <p>Text us a photo of the place and we'll get back to you the same day with a quote. Every job gets quoted on its own.</p>
+    <div class="cta-row">
+      <a class="btn btn-dark" href="sms:0423325989">Text a photo</a>
+      <a class="btn btn-outline-light" href="tel:0423325989">Call 0423 325 989</a>
+    </div>
+    <p class="cta-email">Prefer email? <a href="mailto:mathew.gardensolutions@gmail.com">mathew.gardensolutions@gmail.com</a></p>
+  </div>
+</section>
+<footer class="site-footer">
+<div class="social-block">
+  <p class="social-block-title">Social links</p>
+  <div class="social-row">
+    <a class="social-card" href="https://www.facebook.com/111097840664886">Facebook</a>
+    <a class="social-card" href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a>
+    <a class="social-card" href="https://www.instagram.com/truleaflandscapes/">Instagram</a>
+  </div>
+</div>
+
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo-footer.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
+        <p>Landscaping, garden maintenance and property work in Kangaroo Valley and the surrounding area.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/lawn-mowing-lawn-care">Lawn mowing &amp; lawn care</a></li>
+          <li><a href="/garden-maintenance-upkeep">Garden maintenance</a></li>
+          <li><a href="/hedging-pruning-tree-care">Hedging, pruning &amp; tree care</a></li>
+          <li><a href="/garden-design-landscaping-turf">Garden design, landscaping &amp; turf</a></li>
+          <li><a href="/retaining-walls-paving">Retaining walls &amp; paving</a></li>
+          <li><a href="/irrigation-drainage">Irrigation &amp; drainage</a></li>
+          <li><a href="/ponds-water-features">Ponds &amp; water features</a></li>
+          <li><a href="/property-cleanups-garden-makeovers">Property clean-ups &amp; garden makeovers</a></li>
+          <li><a href="/stump-grinding">Stump grinding</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/gallery">Our work</a></li>
+          <li><a href="/reviews">Reviews</a></li>
+          <li><a href="/process">How we work</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="tel:0423325989">0423 325 989</a></li>
+          <li><a href="sms:0423325989">Text a photo</a></li>
+          <li><a href="mailto:mathew.gardensolutions@gmail.com">Email us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 TruLeaf Landscapes. Fully insured. ABN 82 653 192 795.</span>
+      <span>Hourly billing. Every job gets a free, no-obligation quote.</span>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LandscapingBusiness",
+  "name": "TruLeaf Landscapes",
+  "description": "Landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Real work, real photos.",
+  "telephone": "+61 423 325 989",
+  "url": "https://www.truleaflandscapes.com",
+  "taxID": "82653192795",
+  "areaServed": ["Kangaroo Valley", "Beaumont", "Berry", "Bomaderry", "Sussex Inlet", "Princes Highway corridor"],
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "07:00",
+    "closes": "17:00"
+  }]
+}
+</script>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
+
+  var menuBtn = document.querySelector('.hamburger');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () {
+      var h = document.querySelector('.site-header');
+      var open = h.classList.toggle('nav-open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script type="application/ld+json">{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ {"@type":"ListItem","position":1,"name":"Home","item":"https://www.truleaflandscapes.com"}, {"@type":"ListItem","position":2,"name":"Services","item":"https://www.truleaflandscapes.com/services"} ] }</script>
+
+</body>
+</html>
