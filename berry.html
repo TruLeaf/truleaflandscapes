@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Berry | TruLeaf Landscapes</title>
-<meta name="description" content="TruLeaf Landscapes services Berry and the surrounding area — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<meta name="description" content="{description}">
 <meta name="theme-color" content="#0C3D4E">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/spectral-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/libre-franklin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=202610280600">
-<meta property="og:title" content="Berry | TruLeaf Landscapes">
-<meta property="og:description" content="TruLeaf Landscapes services Berry and the surrounding area — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="{title} | TruLeaf Landscapes">
+<meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://truleaflandscapes.com/berry">
 <meta property="og:image" content="https://truleaflandscapes.com/assets/img/hero-bush-retreat.jpg">
 <meta property="og:site_name" content="TruLeaf Landscapes">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Berry | TruLeaf Landscapes">
-<meta name="twitter:description" content="TruLeaf Landscapes services Berry and the surrounding area — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<meta name="twitter:title" content="{title} | TruLeaf Landscapes">
+<meta name="twitter:description" content="{description}">
 <link rel="canonical" href="https://truleaflandscapes.com/berry">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">
@@ -27,11 +27,11 @@
   "@context": "https://schema.org",
   "@type": "LandscapingBusiness",
   "name": "TruLeaf Landscapes",
-  "description": "Landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Real work, real photos.",
+  "description": "Landscaping, garden maintenance and property work across Berry and the surrounding area. Real work, real photos.",
   "telephone": "+61 423 325 989",
   "url": "https://www.truleaflandscapes.com",
   "taxID": "82653192795",
-  "areaServed": ["Kangaroo Valley", "Beaumont", "Berry", "Bomaderry", "Sussex Inlet", "Princes Highway corridor"],
+  "areaServed": ["Berry"],
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
@@ -48,108 +48,71 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-YQ600CHMN6');
+  gtag('config', 'G-XXXX-XXXX');
 </script>
 <script>
-  /* GA4 event tracking
-     Events:
-       - generate_lead : "Text a photo" (SMS) + Call (tel) buttons
-       - submit_form   : contact/quote form submitted
-       - view_project  : portfolio / service pages opened
-       - page_view     : native pageview (pushed automatically by gtag('config'))
-  */
-
-  // --- generate_lead: "Text a photo" (SMS) + Call (tel) --------------------
+  // --- GA4 event tracking ---
   document.addEventListener('click', function (e) {
     var target = (e && e.target) || null;
     if (!target) return;
     var href = null;
     if (typeof target.getAttribute === 'function') { href = target.getAttribute('href'); }
     if (!href) return;
-
     var method = null;
-    if (/^sms:/.test(href)) { method = 'SMS'; }
-    else if (/^tel:/.test(href)) { method = 'phone'; }
+    if (/^sms:/.test(href)) { method = 'sms'; }
+    else if (/^tel:/.test(href)) { method = 'tel'; }
     else if (/^mailto:/.test(href)) { method = 'email'; }
-    else return;
-
-    gtag('event', 'generate_lead', {
-      cta: (method === 'SMS' ? 'text_a_photo' : (method === 'phone' ? 'phone_call' : 'email')),
-      method: method
+    else if (href.charAt(0) === '#') { method = 'anchor'; }
+    else if (typeof target.closest === 'function' && target.closest('.nav-cta')) { method = 'nav'; }
+    if (!method) return;
+    gtag('event', 'cta_click', {
+      method: method,
+      label: (typeof target.textContent === 'string' ? target.textContent.trim().slice(0, 50) : '')
     });
   }, true);
-
-  // --- submit_form: contact/quote form submitted ---------------------------
+  // --- Form submissions (no forms on site) ---
   document.addEventListener('submit', function (e) {
     var form = (e && e.target) || null;
     if (!form || form.nodeName !== 'FORM') return;
-    gtag('event', 'submit_form', {
-      form_name: (typeof form.getAttribute === 'function' ? form.getAttribute('data-form-name') : '') ||
-                 (typeof form.name === 'string' ? form.name : ''),
-      form_id: (typeof form.id === 'string' ? form.id : '')
+    gtag('event', 'form_submit', {
+      form_id: (typeof form.id === 'string' ? form.id : ''),
+      form_name: (typeof form.name === 'string' ? form.name : ''),
+      method: (typeof form.getAttribute === 'function' ? form.getAttribute('method') : '')
     });
   });
-
-  // --- view_project: portfolio / service pages -----------------------------
+  // --- Project view ---
   (function () {
     var path = '';
     if (typeof window !== 'undefined' && window.location && window.location.pathname) {
       path = window.location.pathname;
     }
     var normalized = path.replace(/\.html$/, '');
-    var projectPages = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|property-cleanups-garden-makeovers|retaining-walls-paving|stump-grinding|garden-design-landscaping-turf|service-areas|gallery)(\/)?$/;
-    if (projectPages.test(normalized)) {
-      gtag('event', 'view_project', { project_id: normalized.replace(/\.html$/, '') });
+    var projectPage = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|
+                          hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|
+                          property-cleanups-garden-makeovers|retaining-walls-paving|
+                          stump-grinding|garden-design-landscaping-turf|service-areas|gallery)
+                       (\/)?$/;
+    if (projectPage.test(normalized)) {
+      gtag('event', 'project_view', {
+        project_id: normalized.replace(/\.html$/, '')
+      });
     }
   })();
-
-  // --- page_view : native — pushed automatically by gtag('config') ---------
 </script>
-
-
-
 </head>
 <body>
-<header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="/" aria-label="TruLeaf Landscapes — home">
-      <img src="assets/logo-excel-clean.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
-    </a>
-    <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-    </button>
-    <nav class="main-nav" id="mainnav" aria-label="Main">
-      <a href="/">Home</a>
-      <a href="/services">Services</a>
-      <a href="/gallery">Our Work</a>
-      <a href="/about">About</a>
-      <a href="/kangaroo-valley">Kangaroo Valley</a>
-      <a href="/service-areas">Service Areas</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/contact">Contact</a>
-    </nav>
-    <div class="header-actions">
-      <a class="header-phone" href="tel:0423325989">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span>0423 325 989</span>
-      </a>
-      <a class="btn btn-orange btn-sm" href="sms:0423325989">Text a photo</a>
-    </div>
-  </div>
-</header>
 
 <section class="band band-light">
   <div class="wrap">
     <div class="sec-head reveal">
       <h1>Berry</h1>
-      <p class="lead">Based in Kangaroo Valley, we service Berry and the surrounding area — village blocks to hobby farms and acreage.</p>
+      <p class="lead">Berry is a township with a distinct character — a historic main street, a working rural hinterland, and a position that puts it halfway between the coast and the inland ranges. I've been working across Berry and the surrounding district for years, and I know the properties, the seasons and the specific challenges of gardening in this part of the Shoalhaven.</p>
     </div>
     <div class="area-hero reveal">
       <img src="assets/img/area-surrounds.jpg" alt="Berry — gardens and properties" width="1500" height="1125" loading="lazy" decoding="async">
       <div class="area-hero-copy">
-        <p>We design, build, plant and maintain gardens across Berry and the surrounding area.</p>
-        <p>We work Berry and the surrounding districts, from village blocks to hobby farms and acreage.</p>
-        <a class="svc-link" href="/services">See Berry services</a>
+        <p>Berry is a township with a distinct character — a historic main street, a working rural hinterland, and a position that puts it halfway between the coast and the inland ranges. I've been working across Berry and the surrounding district for years, and I know the properties, the seasons and the specific challenges of gardening in this part of the Shoalhaven.</p>
+        <a class="svc-link" href="/services">See berry services</a>
       </div>
     </div>
   </div>
@@ -166,15 +129,89 @@
     <p class="cta-email">Prefer email? <a href="mailto:mathew.gardensolutions@gmail.com">mathew.gardensolutions@gmail.com</a></p>
   </div>
 </section>
-<footer class="site-footer">
-  <div class="social-block">
-    <p class="social-block-title">Social links</p>
-    <div class="social-row">
-      <a class="social-card" href="https://www.facebook.com/111097840664886">Facebook</a>
-      <a class="social-card" href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a>
-      <a class="social-card" href="https://www.instagram.com/truleaflandscapes/">Instagram</a>
+
+<section class="band band-light">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Local character</h2>
+      <p>Here's what makes this part of the Shoalhaven distinct — and how it affects your garden.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3>Energy</h3>
+        <p>Berry sits on the coastal side of the range, sheltered from the open ocean but still exposed to hot drying north-westerlies in summer and heavy summer thunderstorms. Frost is uncommon in the township itself but common on the surrounding hills and flats. The township's position between the river flats and the higher country means aspect is everything: a sheltered lower-site stays warmer and frost-free; a hilltop site can be windy and cold in winter.</p>
+        <h3>Soil &amp; planting</h3>
+        <p>Berry's soils are generally sandy loam over clay, with deeper alluvial soils near the river flats and heavier, damper ground on the lower slopes. The sandy sites need mulching and organic matter to hold moisture; the clay sites need drainage work before planting. The key is matching the plant to the soil you have — native and drought-adapted species thrive in the well-drained sites, while heavier soils suit a wider range of garden plants.</p>
+      </div>
+      <div>
+        <h3>Landmarks</h3>
+        <p>The historic main street, the Shoalhaven River and its flats, and the township's orchard and grazing country. The surrounding forest and the road toward Nowra frame the district's identity as a working rural township.</p>
+      </div>
     </div>
   </div>
+</section>
+
+<section class="band band-dark" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Work in berry</h2>
+      <p class="lead">Real jobs from properties right here in berry and the surrounding district.</p>
+    </div>
+    <div class="gallery">
+      
+<figure class="g-item g-c reveal">
+  <img src="assets/img/_originals/047_walls-paving_0240327_105229.jpg" alt="Berry paving and outdoor living project — a village-town character. TruLeaf Landscapes, berry" width="1200" height="900" loading="lazy" decoding="async">
+  <figcaption>Berry paving and outdoor living project — a village-town character</figcaption>
+</figure>
+<figure class="g-item g-c reveal">
+  <img src="assets/img/_originals/082_bush-retreat_0240423_124620.jpg" alt="Berry garden clean-up and reveal — clearing the ground for new planting. TruLeaf Landscapes, berry" width="1200" height="900" loading="lazy" decoding="async">
+  <figcaption>Berry garden clean-up and reveal — clearing the ground for new planting</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section class="band band-light" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Local questions</h2>
+      <p class="lead">Common questions from berry properties — answered for this part of the district.</p>
+    </div>
+    <div class="faq-grid">
+      
+<div class="faq-item reveal">
+  <div class="faq-question">Will the summer wind ruin a new hedge?</div>
+  <div class="faq-answer">A hot north-Westerly can dry out a new hedge quickly, especially on an exposed site. Plant on a sheltered aspect, stake and protect the young hedge, and water it through the first summer. A thick mulch helps the soil hold moisture through the hot spells.</div>
+</div>
+<div class="faq-item reveal">
+  <div class="faq-question">What soil do I need for native gardens here?</div>
+  <div class="faq-answer">Berry's sandy loam over clay is workable for most natives if drainage is good. The sandy sites need organic matter and mulch; the clay sites need drainage improvement before planting. Match the plant to the soil you have.</div>
+</div>
+<div class="faq-item reveal">
+  <div class="faq-question">When is the best planting window?</div>
+  <div class="faq-answer">Autumn gives the best results: warm soil, incoming rain, and established root growth before the winter and summer heat. Early spring works too, provided you water through the first dry spell.</div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-orange cta-band" id="nap">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Local details</h2>
+      <p class="lead">Everything you need for this part of the district.</p>
+    </div>
+    <div class="nap-block">
+      <p><strong>TruLeaf Landscapes</strong></p>
+      <p>TruLeaf Landscapes
+Berry NSW
+0423 325 989
+mathew.gardensolutions@gmail.com</p>
+      <p><em>Recommended for properties in berry and the surrounding district.</em></p>
+    </div>
+  </div>
+</section>
+<footer>
 <div class="social-block">
   <p class="social-block-title">Social links</p>
   <div class="social-row">
@@ -183,70 +220,38 @@
     <a class="social-card" href="https://www.instagram.com/truleaflandscapes/">Instagram</a>
   </div>
 </div>
-
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <img src="assets/logo-excel-clean.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
-        <p class="tagline">Perfecting nature, one leaf at a time.</p>
-        <p>We do landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Every photo on this site is a real job.</p>
-      </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/gallery">Our Work</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="https://www.facebook.com/111097840664886">Facebook</a></li>
-          <li><a href="https://www.instagram.com/truleaflandscapes/">Instagram</a></li>
-          <li><a href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a></li>
-        </ul>
-      </div>
+<div class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="assets/logo-footer.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
+      <p class="tagline">Perfecting nature, one leaf at a time.</p>
+      <p>We do landscaping, garden maintenance and property work across {area_line}. Every photo on this site is a real job.</p>
     </div>
-    <div class="foot-base">
-      <span>&copy; 2026 TruLeaf Landscapes. Fully insured. ABN 82 653 192 795.</span>
-      <span>Hourly billing. Every job gets a free, no-obligation quote.</span>
-      <a href="/privacy">Privacy</a>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/gallery">Our Work</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/111097840664886">Facebook</a></li>
+        <li><a href="https://www.instagram.com/truleaflandscapes/">Instagram</a></li>
+        <li><a href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a></li>
+      </ul>
     </div>
   </div>
+  <div class="foot-base">
+    <span>&copy; 2026 TruLeaf Landscapes. Fully insured. ABN 82 653 192 795.</span>
+    <span>Hourly billing. Every job gets a free, no-obligation quote.</span>
+    <a href="/privacy">Privacy</a>
+  </div>
+</div>
 </footer>
-<script>
-(function () {
-  var root = document.documentElement;
-  root.classList.add('js');
-
-  var menuBtn = document.querySelector('.hamburger');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', function () {
-      var h = document.querySelector('.site-header');
-      var open = h.classList.toggle('nav-open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  if (!('IntersectionObserver' in window) ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-
-  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-})();
-</script>
 </body>
 </html>
