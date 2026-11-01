@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Our Process | TruLeaf Landscapes — Kangaroo Valley Landscaping</title>
-<meta name="description" content="Learn about our landscaping process at TruLeaf Landscapes. From the first consultation to the final walkthrough, we keep you informed at every step.">
+<title>How we work | TruLeaf Landscapes</title>
+<meta name="description" content="How we work — call or text, on-site quote, booked in, job done. TruLeaf Landscapes, Kangaroo Valley.">
 <meta name="theme-color" content="#0C3D4E">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/spectral-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/libre-franklin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=202610280600">
-<meta property="og:title" content="Our Process | TruLeaf Landscapes">
-<meta property="og:description" content="Learn about our landscaping process at TruLeaf Landscapes. From the first consultation to the final walkthrough, we keep you informed at every step.">
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="How we work | TruLeaf Landscapes">
+<meta property="og:description" content="How we work — call or text, on-site quote, booked in, job done. TruLeaf Landscapes, Kangaroo Valley.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://truleaflandscapes.com/process.html">
+<meta property="og:url" content="https://truleaflandscapes.com/process">
 <meta property="og:image" content="https://truleaflandscapes.com/assets/img/hero-bush-retreat.jpg">
 <meta property="og:site_name" content="TruLeaf Landscapes">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Our Process | TruLeaf Landscapes">
-<meta name="twitter:description" content="TruLeaf Landscapes — our process — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<meta name="twitter:title" content="How we work | TruLeaf Landscapes">
+<meta name="twitter:description" content="TruLeaf Landscapes — how we work — gardens, lawns, hardscapes and more. Text a photo for a quote.">
 <link rel="canonical" href="https://truleaflandscapes.com/process">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">
@@ -47,19 +47,22 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-YQ600CHMN6');
-</script>
-<script>
-  /* GA4 event tracking
-     Events:
-       - generate_lead : "Text a photo" (SMS) + Call (tel) buttons
-       - submit_form   : contact/quote form submitted
-       - view_project  : portfolio / service pages opened
-       - page_view     : native pageview (pushed automatically by gtag('config'))
-  */
 
-  // --- generate_lead: "Text a photo" (SMS) + Call (tel) --------------------
+  gtag('js', new Date());
+  gtag('config', 'G-XXXX-XXXX');
+
+  /* ============================================================
+     GA4 event tracking
+
+     Events documented at /docs/ga4-events.md
+       - cta_click  : fired when a clickable call-to-action is tapped/clicked
+       - form_submit : fired when any <form> is submitted
+       - project_view : fired when a portfolio / service page is opened
+     ============================================================ */
+
+  // --- 1) CTA clicks -------------------------------------------------
+  // Only the site's real call-to-action schemes are tracked: sms, tel,
+  // mailto, anchors, and the labelled .nav-cta button.
   document.addEventListener('click', function (e) {
     var target = (e && e.target) || null;
     if (!target) return;
@@ -68,43 +71,56 @@
     if (!href) return;
 
     var method = null;
-    if (/^sms:/.test(href)) { method = 'SMS'; }
-    else if (/^tel:/.test(href)) { method = 'phone'; }
+    if (/^sms:/.test(href)) { method = 'sms'; }
+    else if (/^tel:/.test(href)) { method = 'tel'; }
     else if (/^mailto:/.test(href)) { method = 'email'; }
-    else return;
+    else if (href.charAt(0) === '#') { method = 'anchor'; }
+    else if (typeof target.closest === 'function' && target.closest('.nav-cta')) { method = 'nav'; }
+    if (!method) return;
 
-    gtag('event', 'generate_lead', {
-      cta: (method === 'SMS' ? 'text_a_photo' : (method === 'phone' ? 'phone_call' : 'email')),
-      method: method
+    gtag('event', 'cta_click', {
+      method: method,
+      label: (typeof target.textContent === 'string' ? target.textContent.trim().slice(0, 50) : '')
     });
   }, true);
 
-  // --- submit_form: contact/quote form submitted ---------------------------
+  // --- 2) Form submissions -------------------------------------------
+  // The site ships with no <form> (README: "No enquiry, contact or quote form").
+  // This listener is wired so that any <form> added later records a
+  // form_submit automatically; currently nothing will fire.
   document.addEventListener('submit', function (e) {
     var form = (e && e.target) || null;
     if (!form || form.nodeName !== 'FORM') return;
-    gtag('event', 'submit_form', {
-      form_name: (typeof form.getAttribute === 'function' ? form.getAttribute('data-form-name') : '') ||
-                 (typeof form.name === 'string' ? form.name : ''),
-      form_id: (typeof form.id === 'string' ? form.id : '')
+    gtag('event', 'form_submit', {
+      form_id: (typeof form.id === 'string' ? form.id : ''),
+      form_name: (typeof form.name === 'string' ? form.name : ''),
+      method: (typeof form.getAttribute === 'function' ? form.getAttribute('method') : '')
     });
   });
 
-  // --- view_project: portfolio / service pages -----------------------------
+  // --- 3) Project view -------------------------------------------------
+  // 'Our Work' portfolio + service detail pages. The standard gtag config()
+  // already pushes a page_view; this adds a distinct project_view event.
   (function () {
     var path = '';
     if (typeof window !== 'undefined' && window.location && window.location.pathname) {
       path = window.location.pathname;
     }
+    // Normalize trailing .html so project_view fires for both /x and /x.html.
     var normalized = path.replace(/\.html$/, '');
-    var projectPages = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|property-cleanups-garden-makeovers|retaining-walls-paving|stump-grinding|garden-design-landscaping-turf|service-areas|gallery)(\/)?$/;
-    if (projectPages.test(normalized)) {
-      gtag('event', 'view_project', { project_id: normalized.replace(/\.html$/, '') });
+    var projectPage = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|
+                          hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|
+                          property-cleanups-garden-makeovers|retaining-walls-paving|
+                          stump-grinding|garden-design-landscaping-turf|service-areas|gallery)
+                       (\/)?$/;
+    if (projectPage.test(normalized)) {
+      gtag('event', 'project_view', {
+        project_id: normalized.replace(/\.html$/, '')
+      });
     }
   })();
-
-  // --- page_view : native — pushed automatically by gtag('config') ---------
 </script>
+
 
 
 
@@ -113,7 +129,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/" aria-label="TruLeaf Landscapes — home">
-      <img src="assets/logo-excel-clean.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
+      <img src="assets/logo-header.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
     </a>
     <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -127,6 +143,7 @@
       <a href="/service-areas">Service Areas</a>
       <a href="/privacy">Privacy</a>
       <a href="/contact">Contact</a>
+      <a class="nav-cta" href="sms:0423325989">Text a photo</a>
     </nav>
     <div class="header-actions">
       <a class="header-phone" href="tel:0423325989">
@@ -142,21 +159,21 @@
 <section class="band band-light" id="how-work">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h1>Our Process</h1>
+      <h1>How we work</h1>
       <p class="lead">No quotes off the cuff, no jargon. Here's what happens from the first phone call to the finished job.</p>
     </div>
     <div class="step-wrap">
       <div class="step">
         <span class="step-num">1</span>
         <div class="step-body">
-          <h3>Contact</h3>
+          <h3>Call or text</h3>
           <p>Give us a call on 0423 325 989 or text a photo — tell us what you need, and we'll point you in the right direction.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
         <div class="step-body">
-          <h3>Free quote</h3>
+          <h3>On-site quote</h3>
           <p>We come out, look at the job, and give you a written quote. No hidden extras, no pressure.</p>
         </div>
       </div>
@@ -170,7 +187,7 @@
       <div class="step">
         <span class="step-num">4</span>
         <div class="step-body">
-          <h3>Work done</h3>
+          <h3>Job done</h3>
           <p>Work done to standard, and the site left clean. Every job gets quoted on its own.</p>
         </div>
       </div>
@@ -204,7 +221,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="assets/logo-excel-clean.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
+        <img src="assets/logo-footer.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
         <p class="tagline">Perfecting nature, one leaf at a time.</p>
         <p>We do landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Every photo on this site is a real job.</p>
       </div>
@@ -234,36 +251,5 @@
     </div>
   </div>
 </footer>
-<script>
-(function () {
-  var root = document.documentElement;
-  root.classList.add('js');
-
-  var menuBtn = document.querySelector('.hamburger');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', function () {
-      var h = document.querySelector('.site-header');
-      var open = h.classList.toggle('nav-open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  if (!('IntersectionObserver' in window) ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-
-  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-})();
-</script>
 </body>
 </html>
