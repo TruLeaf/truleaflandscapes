@@ -528,7 +528,7 @@
   for (var r = 0; r < rotators.length; r++) {
     var cards = rotators[r].querySelectorAll('.rev-card');
     if (cards.length < 2) continue;
-    var i = 0;
+    let i = 0;
     cards[0].classList.add('is-active');
     (function (cards, n) {
       setInterval(function () {
