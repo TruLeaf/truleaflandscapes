@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sussex Inlet | TruLeaf Landscapes</title>
-<meta name="description" content="TruLeaf Landscapes services Sussex Inlet and the surrounding area — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<meta name="description" content="Sussex Inlet landscaping services — mowing, garden maintenance, hedging, retaining walls and more, on the coast. Text a photo for a free quote.">
 <meta name="theme-color" content="#0C3D4E">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -12,14 +12,14 @@
 <link rel="preload" href="assets/fonts/libre-franklin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Sussex Inlet | TruLeaf Landscapes">
-<meta property="og:description" content="TruLeaf Landscapes services Sussex Inlet and the surrounding area — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<meta property="og:description" content="Sussex Inlet landscaping services — mowing, garden maintenance, hedging, retaining walls and more, on the coast and tidal estuary in the southern Shoalhaven. Text a photo for a free quote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://truleaflandscapes.com/sussex-inlet">
 <meta property="og:image" content="https://truleaflandscapes.com/assets/img/hero-bush-retreat.jpg">
 <meta property="og:site_name" content="TruLeaf Landscapes">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Sussex Inlet | TruLeaf Landscapes">
-<meta name="twitter:description" content="TruLeaf Landscapes services Sussex Inlet and the surrounding area — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<meta name="twitter:description" content="Sussex Inlet landscaping services — mowing, garden maintenance, hedging, retaining walls and more, on the coast and tidal estuary in the southern Shoalhaven. Text a photo for a free quote.">
 <link rel="canonical" href="https://truleaflandscapes.com/sussex-inlet">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">
@@ -27,11 +27,11 @@
   "@context": "https://schema.org",
   "@type": "LandscapingBusiness",
   "name": "TruLeaf Landscapes",
-  "description": "Landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Real work, real photos.",
+  "description": "Landscaping, garden maintenance and property work across Sussex Inlet and the surrounding area. Real work, real photos.",
   "telephone": "+61 423 325 989",
-  "url": "https://www.truleaflandscapes.com",
+  "url": "https://truleaflandscapes.com",
   "taxID": "82653192795",
-  "areaServed": ["Kangaroo Valley", "Beaumont", "Berry", "Bomaderry", "Sussex Inlet", "Princes Highway corridor"],
+  "areaServed": ["Sussex Inlet"],
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
@@ -51,63 +51,54 @@
   gtag('config', 'G-YQ600CHMN6');
 </script>
 <script>
-  /* GA4 event tracking
-     Events:
-       - generate_lead : "Text a photo" (SMS) + Call (tel) buttons
-       - submit_form   : contact/quote form submitted
-       - view_project  : portfolio / service pages opened
-       - page_view     : native pageview (pushed automatically by gtag('config'))
-  */
-
-  // --- generate_lead: "Text a photo" (SMS) + Call (tel) --------------------
+  // --- GA4 event tracking ---
   document.addEventListener('click', function (e) {
     var target = (e && e.target) || null;
     if (!target) return;
     var href = null;
     if (typeof target.getAttribute === 'function') { href = target.getAttribute('href'); }
     if (!href) return;
-
     var method = null;
-    if (/^sms:/.test(href)) { method = 'SMS'; }
-    else if (/^tel:/.test(href)) { method = 'phone'; }
+    if (/^sms:/.test(href)) { method = 'sms'; }
+    else if (/^tel:/.test(href)) { method = 'tel'; }
     else if (/^mailto:/.test(href)) { method = 'email'; }
-    else return;
-
-    gtag('event', 'generate_lead', {
-      cta: (method === 'SMS' ? 'text_a_photo' : (method === 'phone' ? 'phone_call' : 'email')),
-      method: method
+    else if (href.charAt(0) === '#') { method = 'anchor'; }
+    else if (typeof target.closest === 'function' && target.closest('.nav-cta')) { method = 'nav'; }
+    if (!method) return;
+    gtag('event', 'cta_click', {
+      method: method,
+      label: (typeof target.textContent === 'string' ? target.textContent.trim().slice(0, 50) : '')
     });
   }, true);
-
-  // --- submit_form: contact/quote form submitted ---------------------------
+  // --- Form submissions (no forms on site) ---
   document.addEventListener('submit', function (e) {
     var form = (e && e.target) || null;
     if (!form || form.nodeName !== 'FORM') return;
-    gtag('event', 'submit_form', {
-      form_name: (typeof form.getAttribute === 'function' ? form.getAttribute('data-form-name') : '') ||
-                 (typeof form.name === 'string' ? form.name : ''),
-      form_id: (typeof form.id === 'string' ? form.id : '')
+    gtag('event', 'form_submit', {
+      form_id: (typeof form.id === 'string' ? form.id : ''),
+      form_name: (typeof form.name === 'string' ? form.name : ''),
+      method: (typeof form.getAttribute === 'function' ? form.getAttribute('method') : '')
     });
   });
-
-  // --- view_project: portfolio / service pages -----------------------------
+  // --- Project view ---
   (function () {
     var path = '';
     if (typeof window !== 'undefined' && window.location && window.location.pathname) {
       path = window.location.pathname;
     }
     var normalized = path.replace(/\.html$/, '');
-    var projectPages = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|property-cleanups-garden-makeovers|retaining-walls-paving|stump-grinding|garden-design-landscaping-turf|service-areas|gallery)(\/)?$/;
-    if (projectPages.test(normalized)) {
-      gtag('event', 'view_project', { project_id: normalized.replace(/\.html$/, '') });
+    var projectPage = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|
+                          hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|
+                          property-cleanups-garden-makeovers|retaining-walls-paving|
+                          stump-grinding|garden-design-landscaping-turf|service-areas|gallery)
+                       (\/)?$/;
+    if (projectPage.test(normalized)) {
+      gtag('event', 'project_view', {
+        project_id: normalized.replace(/\.html$/, '')
+      });
     }
   })();
-
-  // --- page_view : native — pushed automatically by gtag('config') ---------
 </script>
-
-
-
 </head>
 <body>
 <header class="site-header">
@@ -126,6 +117,8 @@
       <a href="/kangaroo-valley">Kangaroo Valley</a>
       <a href="/service-areas">Service Areas</a>
       <a href="/privacy">Privacy</a>
+      <a href="/faq">FAQ</a>
+      <a href="/blog">Blog</a>
       <a href="/contact">Contact</a>
       <a class="nav-cta" href="sms:0423325989">Text a photo</a>
     </nav>
@@ -143,14 +136,13 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <h1>Sussex Inlet</h1>
-      <p class="lead">Based in Kangaroo Valley, we service Sussex Inlet and the surrounding area — village blocks to hobby farms and acreage.</p>
+      <p class="lead">Sussex Inlet is a coastal township in the southern Shoalhaven, known for its long beach, tidal estuary and relaxed holiday lifestyle. It is a place where the ocean and the estuary meet the land, and where properties range from beachfront blocks to hobby farms. I've worked across this district for years, and I know the properties, the seasons and the specific challenges of gardening on the coast.</p>
     </div>
     <div class="area-hero reveal">
       <img src="assets/img/area-surrounds.jpg" alt="Sussex Inlet — gardens and properties" width="1500" height="1125" loading="lazy" decoding="async">
       <div class="area-hero-copy">
-        <p>We design, build, plant and maintain gardens across Sussex Inlet and the surrounding districts.</p>
-        <p>We work Sussex Inlet and the surrounding districts, from village blocks to hobby farms and acreage.</p>
-        <a class="svc-link" href="/services">See Sussex Inlet services</a>
+        <p>Sussex Inlet is a coastal township in the southern Shoalhaven, known for its long beach, tidal estuary and relaxed holiday lifestyle. It is a place where the ocean and the estuary meet the land, and where properties range from beachfront blocks to hobby farms. I've worked across this district for years, and I know the properties, the seasons and the specific challenges of gardening on the coast.</p>
+        <a class="svc-link" href="/services">See sussex inlet services</a>
       </div>
     </div>
   </div>
@@ -167,7 +159,89 @@
     <p class="cta-email">Prefer email? <a href="mailto:mathew.gardensolutions@gmail.com">mathew.gardensolutions@gmail.com</a></p>
   </div>
 </section>
-<footer class="site-footer">
+
+<section class="band band-light">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Local character</h2>
+      <p>Here's what makes this part of the Shoalhaven distinct — and how it affects your garden.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3>Energy</h3>
+        <p>Sussex Inlet is a tidal estuary settlement: the inlet fills and empties with the tide, and the surrounding country is a mix of coastal forest, farms and hobby lots. The town has direct exposure to southerly swell and the ocean, which means southerly winds and storm surges are the main weather risk. The estuary floods at high tide, and low-lying paddocks can become waterlogged. The hills shelter the deeper parts of the town, but the foreshore and lower ground are exposed to the full force of the elements.</p>
+        <h3>Soil &amp; planting</h3>
+        <p>The town is built on coastal sand over clay, with sandy soils near the beach that drain quickly and heavier clay soils in the lower grounds and around the estuary. The sandy sites need mulching and organic matter to hold moisture; the clay sites need drainage attention before planting. The coastal position means salt-laden wind affects exposed sites, which suits salt-tolerant species.</p>
+      </div>
+      <div>
+        <h3>Landmarks</h3>
+        <p>The Sussex Inlet beach and estuary, the town's foreshore walk, and the surrounding coastal forest. The estuary and its salt marshes are the defining landscape feature, and the beach is the heart of the town's coastal identity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-dark" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Work in sussex inlet</h2>
+      <p class="lead">Real jobs from properties right here in sussex inlet and the surrounding district.</p>
+    </div>
+    <div class="gallery">
+      
+<figure class="g-item g-c reveal">
+  <img src="assets/img/_originals/033_bush-retreat_0240220_143405.jpg" alt="Sussex Inlet property clean-up and landscaping — the coastal exposure. TruLeaf Landscapes, sussex inlet" width="1200" height="900" loading="lazy" decoding="async">
+  <figcaption>Sussex Inlet property clean-up and landscaping — the coastal exposure</figcaption>
+</figure>
+<figure class="g-item g-c reveal">
+  <img src="assets/img/_originals/041_bush-retreat_0240227_104920.jpg" alt="Sussex Inlet garden restoration — clearing the ground for new planting. TruLeaf Landscapes, sussex inlet" width="1200" height="900" loading="lazy" decoding="async">
+  <figcaption>Sussex Inlet garden restoration — clearing the ground for new planting</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section class="band band-light" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Local questions</h2>
+      <p class="lead">Common questions from sussex inlet properties — answered for this part of the district.</p>
+    </div>
+    <div class="faq-grid">
+      
+<div class="faq-item reveal">
+  <div class="faq-question">Will the summer wind ruin a new hedge?</div>
+  <div class="faq-answer">A southerly swell can dry out a new hedge on an exposed foreshore. Plant in a sheltered position, stake the hedge for two winters, and protect it from the salt-laden wind. A thick mulch and windbreak give new plantings the best start.</div>
+</div>
+<div class="faq-item reveal">
+  <div class="faq-question">What soil do I need for native gardens here?</div>
+  <div class="faq-answer">Sussex Inlet's coastal sand over clay is workable for most natives if drainage is good. The sandy sites need organic matter and mulch; the clay sites need drainage improvement. Salt-laden wind suits salt-tolerant species, so match the plant to the exposure.</div>
+</div>
+<div class="faq-item reveal">
+  <div class="faq-question">When is the best planting window?</div>
+  <div class="faq-answer">Autumn is ideal: warm soil, incoming rain, and established root growth before the winter storms and summer dry season. Spring planting works, provided you water through the first dry spell.</div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-orange cta-band" id="nap">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Local details</h2>
+      <p class="lead">Everything you need for this part of the district.</p>
+    </div>
+    <div class="nap-block">
+      <p><strong>TruLeaf Landscapes</strong></p>
+      <p>TruLeaf Landscapes
+Sussex Inlet NSW
+0423 325 989
+mathew.gardensolutions@gmail.com</p>
+      <p><em>Recommended for properties in sussex inlet and the surrounding district.</em></p>
+    </div>
+  </div>
+</section>
+<footer>
 <div class="social-block">
   <p class="social-block-title">Social links</p>
   <div class="social-row">
@@ -176,70 +250,40 @@
     <a class="social-card" href="https://www.instagram.com/truleaflandscapes/">Instagram</a>
   </div>
 </div>
-
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <img src="assets/logo-footer.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
-        <p class="tagline">Perfecting nature, one leaf at a time.</p>
-        <p>We do landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Every photo on this site is a real job.</p>
-      </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/gallery">Our Work</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="https://www.facebook.com/111097840664886">Facebook</a></li>
-          <li><a href="https://www.instagram.com/truleaflandscapes/">Instagram</a></li>
-          <li><a href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a></li>
-        </ul>
-      </div>
+<div class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="assets/logo-footer.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
+      <p class="tagline">Perfecting nature, one leaf at a time.</p>
+      <p>We do landscaping, garden maintenance and property work across Sussex Inlet. Every photo on this site is a real job.</p>
     </div>
-    <div class="foot-base">
-      <span>&copy; 2026 TruLeaf Landscapes. Fully insured. ABN 82 653 192 795.</span>
-      <span>Hourly billing. Every job gets a free, no-obligation quote.</span>
-      <a href="/privacy">Privacy</a>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/gallery">Our Work</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/111097840664886">Facebook</a></li>
+        <li><a href="https://www.instagram.com/truleaflandscapes/">Instagram</a></li>
+        <li><a href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a></li>
+      </ul>
     </div>
   </div>
+  <div class="foot-base">
+    <span>&copy; 2026 TruLeaf Landscapes. Fully insured. ABN 82 653 192 795.</span>
+    <span>Hourly billing. Every job gets a free, no-obligation quote.</span>
+    <a href="/privacy">Privacy</a>
+  </div>
+</div>
 </footer>
-<script>
-(function () {
-  var root = document.documentElement;
-  root.classList.add('js');
-
-  var menuBtn = document.querySelector('.hamburger');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', function () {
-      var h = document.querySelector('.site-header');
-      var open = h.classList.toggle('nav-open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  if (!('IntersectionObserver' in window) ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-
-  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-})();
-</script>
+<script type="application/ld+json">{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ {"@type":"ListItem","position":1,"name":"Home","item":"https://truleaflandscapes.com"}, {"@type":"ListItem","position":2,"name":"Service Areas","item":"https://truleaflandscapes.com/service-areas"}, {"@type":"ListItem","position":3,"name":"Sussex Inlet","item":"https://truleaflandscapes.com/sussex-inlet"} ] }</script>
 </body>
 </html>

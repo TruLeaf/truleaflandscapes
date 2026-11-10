@@ -213,12 +213,9 @@ h1, h2, h3 {
 
 .main-nav { display: flex; align-items: center; gap: 14px; margin-left: auto; }
 .main-nav a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
   color: var(--teal-100);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: .95rem;
   font-weight: 500;
   letter-spacing: .01em;
   padding: 8px 2px;
@@ -951,6 +948,50 @@ h1, h2, h3 {
 .privacy-copy p { margin-bottom: 16px; color: var(--ink-soft); line-height: 1.6; }
 .privacy-copy h3 { font-size: 1.1rem; color: var(--teal-800); margin: 28px 0 10px; }
 
+/* Area page "Local character" two-column block */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 48px; }
+.two-col h3 { font-size: 1.1rem; color: var(--teal-800); margin: 0 0 8px; }
+.two-col h3 + p { margin-bottom: 24px; }
+.two-col p { color: var(--ink-soft); line-height: 1.6; }
+
+/* FAQ — used on area pages and the dedicated FAQ page */
+.faq-grid { display: grid; gap: 18px; max-width: 760px; }
+.faq-item { padding: 20px 24px; background: var(--paper-2); border: 1px solid var(--tint); border-radius: 8px; }
+.faq-question { font-weight: 600; color: var(--teal-800); margin-bottom: 8px; }
+.faq-answer { color: var(--ink-soft); line-height: 1.6; font-size: .95rem; }
+.band-dark .faq-item { background: var(--teal-900); border-color: var(--teal-700); }
+.band-dark .faq-question { color: #fff; }
+.band-dark .faq-answer { color: var(--teal-200); }
+
+/* NAP (name/address/phone) block — area pages, orange CTA band */
+.nap-block { max-width: 520px; }
+.nap-block p { margin-bottom: 10px; line-height: 1.6; }
+
+/* Blog */
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.blog-card { display: block; background: var(--paper-2); border-radius: 8px; overflow: hidden; box-shadow: 0 14px 34px -20px rgba(23, 45, 54, .28); transition: transform .3s ease, box-shadow .3s ease; }
+.blog-card:hover { transform: translateY(-3px); box-shadow: 0 24px 44px -20px rgba(23, 45, 54, .36); }
+.blog-card .ph { aspect-ratio: 16 / 10; overflow: hidden; display: block; }
+.blog-card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .42s ease; }
+.blog-card:hover .ph img { transform: scale(1.035); }
+.blog-card-body { padding: 22px 24px 26px; }
+.blog-card-body .blog-date { font-size: .82rem; color: var(--teal-500); font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
+.blog-card-body h3 { font-size: 1.15rem; margin: 8px 0 10px; }
+.blog-card-body p { font-size: .94rem; color: var(--ink-soft); line-height: 1.58; }
+.blog-post-copy { max-width: 70ch; }
+.blog-post-copy .blog-date { font-size: .9rem; color: var(--teal-500); font-weight: 600; text-transform: uppercase; letter-spacing: .02em; }
+.blog-post-copy p { margin-bottom: 18px; color: var(--ink-soft); line-height: 1.68; font-size: 1.02rem; }
+.blog-post-copy h2 { font-size: 1.5rem; margin: 36px 0 14px; }
+.blog-post-hero { border-radius: 8px; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin: 28px 0; box-shadow: 0 22px 46px -22px rgba(23,45,54,.45); }
+
+@media (max-width: 860px) {
+  .two-col { grid-template-columns: 1fr; }
+  .blog-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .blog-grid { grid-template-columns: 1fr; }
+}
+
 /* --------------------------------------------------------------------------
    15. Service page — page head
    -------------------------------------------------------------------------- */
@@ -1093,35 +1134,6 @@ h1, h2, h3 {
   transition: color 160ms var(--ease);
 }
 .rev-more:hover { color: var(--teal-500); }
-
-.rev-viewport { position: relative; }
-.rev-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(12, 61, 78, .18);
-  background: #fff;
-  color: var(--teal-800);
-  font-size: 1.1rem;
-  line-height: 1;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 18px -10px rgba(12, 61, 78, .35);
-  transition: background 160ms var(--ease), color 160ms var(--ease), transform 160ms var(--ease);
-}
-.rev-btn:hover { background: var(--teal-800); color: #fff; }
-.rev-btn:active { transform: translateY(-50%) scale(0.97); }
-.rev-btn.prev { left: -8px; }
-.rev-btn.next { right: -8px; }
-@media (max-width: 860px) {
-  .rev-btn.prev { left: 4px; }
-  .rev-btn.next { right: 4px; }
-}
 
 /* --------------------------------------------------------------------------
    17. Responsive — 1920 down to 360, no horizontal overflow at any width.

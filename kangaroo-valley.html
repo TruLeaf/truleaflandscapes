@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kangaroo Valley | TruLeaf Landscapes</title>
-<meta name="description" content="TruLeaf Landscapes services Kangaroo Valley and the surrounding area — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<meta name="description" content="Landscaping, lawn mowing and garden maintenance in Kangaroo Valley — our home base in the NSW Shoalhaven. Text a photo for a free quote.">
 <meta name="theme-color" content="#0C3D4E">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -12,14 +12,14 @@
 <link rel="preload" href="assets/fonts/libre-franklin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Kangaroo Valley | TruLeaf Landscapes">
-<meta property="og:description" content="TruLeaf Landscapes services Kangaroo Valley and the surrounding area — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<meta property="og:description" content="Landscaping, lawn mowing and garden maintenance in Kangaroo Valley — our home base in the NSW Shoalhaven. Text a photo for a free quote.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://truleaflandscapes.com/kangaroo-valley">
 <meta property="og:image" content="https://truleaflandscapes.com/assets/img/hero-bush-retreat.jpg">
 <meta property="og:site_name" content="TruLeaf Landscapes">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kangaroo Valley | TruLeaf Landscapes">
-<meta name="twitter:description" content="TruLeaf Landscapes services Kangaroo Valley and the surrounding area — gardens, lawns, hardscapes and more. Text a photo for a quote.">
+<meta name="twitter:description" content="Landscaping, lawn mowing and garden maintenance in Kangaroo Valley — our home base in the NSW Shoalhaven. Text a photo for a free quote.">
 <link rel="canonical" href="https://truleaflandscapes.com/kangaroo-valley">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">
@@ -29,9 +29,9 @@
   "name": "TruLeaf Landscapes",
   "description": "Landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Real work, real photos.",
   "telephone": "+61 423 325 989",
-  "url": "https://www.truleaflandscapes.com",
+  "url": "https://truleaflandscapes.com",
   "taxID": "82653192795",
-  "areaServed": ["Kangaroo Valley", "Beaumont", "Berry", "Bomaderry", "Sussex Inlet", "Princes Highway corridor"],
+  "areaServed": ["Kangaroo Valley"],
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
@@ -51,63 +51,54 @@
   gtag('config', 'G-YQ600CHMN6');
 </script>
 <script>
-  /* GA4 event tracking
-     Events:
-       - generate_lead : "Text a photo" (SMS) + Call (tel) buttons
-       - submit_form   : contact/quote form submitted
-       - view_project  : portfolio / service pages opened
-       - page_view     : native pageview (pushed automatically by gtag('config'))
-  */
-
-  // --- generate_lead: "Text a photo" (SMS) + Call (tel) --------------------
+  // --- GA4 event tracking ---
   document.addEventListener('click', function (e) {
     var target = (e && e.target) || null;
     if (!target) return;
     var href = null;
     if (typeof target.getAttribute === 'function') { href = target.getAttribute('href'); }
     if (!href) return;
-
     var method = null;
-    if (/^sms:/.test(href)) { method = 'SMS'; }
-    else if (/^tel:/.test(href)) { method = 'phone'; }
+    if (/^sms:/.test(href)) { method = 'sms'; }
+    else if (/^tel:/.test(href)) { method = 'tel'; }
     else if (/^mailto:/.test(href)) { method = 'email'; }
-    else return;
-
-    gtag('event', 'generate_lead', {
-      cta: (method === 'SMS' ? 'text_a_photo' : (method === 'phone' ? 'phone_call' : 'email')),
-      method: method
+    else if (href.charAt(0) === '#') { method = 'anchor'; }
+    else if (typeof target.closest === 'function' && target.closest('.nav-cta')) { method = 'nav'; }
+    if (!method) return;
+    gtag('event', 'cta_click', {
+      method: method,
+      label: (typeof target.textContent === 'string' ? target.textContent.trim().slice(0, 50) : '')
     });
   }, true);
-
-  // --- submit_form: contact/quote form submitted ---------------------------
+  // --- Form submissions (no forms on site) ---
   document.addEventListener('submit', function (e) {
     var form = (e && e.target) || null;
     if (!form || form.nodeName !== 'FORM') return;
-    gtag('event', 'submit_form', {
-      form_name: (typeof form.getAttribute === 'function' ? form.getAttribute('data-form-name') : '') ||
-                 (typeof form.name === 'string' ? form.name : ''),
-      form_id: (typeof form.id === 'string' ? form.id : '')
+    gtag('event', 'form_submit', {
+      form_id: (typeof form.id === 'string' ? form.id : ''),
+      form_name: (typeof form.name === 'string' ? form.name : ''),
+      method: (typeof form.getAttribute === 'function' ? form.getAttribute('method') : '')
     });
   });
-
-  // --- view_project: portfolio / service pages -----------------------------
+  // --- Project view ---
   (function () {
     var path = '';
     if (typeof window !== 'undefined' && window.location && window.location.pathname) {
       path = window.location.pathname;
     }
     var normalized = path.replace(/\.html$/, '');
-    var projectPages = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|property-cleanups-garden-makeovers|retaining-walls-paving|stump-grinding|garden-design-landscaping-turf|service-areas|gallery)(\/)?$/;
-    if (projectPages.test(normalized)) {
-      gtag('event', 'view_project', { project_id: normalized.replace(/\.html$/, '') });
+    var projectPage = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|
+                          hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|
+                          property-cleanups-garden-makeovers|retaining-walls-paving|
+                          stump-grinding|garden-design-landscaping-turf|service-areas|gallery)
+                       (\/)?$/;
+    if (projectPage.test(normalized)) {
+      gtag('event', 'project_view', {
+        project_id: normalized.replace(/\.html$/, '')
+      });
     }
   })();
-
-  // --- page_view : native — pushed automatically by gtag('config') ---------
 </script>
-
-
-
 </head>
 <body>
 <header class="site-header">
@@ -126,6 +117,8 @@
       <a href="/kangaroo-valley">Kangaroo Valley</a>
       <a href="/service-areas">Service Areas</a>
       <a href="/privacy">Privacy</a>
+      <a href="/faq">FAQ</a>
+      <a href="/blog">Blog</a>
       <a href="/contact">Contact</a>
       <a class="nav-cta" href="sms:0423325989">Text a photo</a>
     </nav>
@@ -143,14 +136,13 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <h1>Kangaroo Valley</h1>
-      <p class="lead">Based in Kangaroo Valley, we service the surrounding area — village blocks to hobby farms and acreage.</p>
+      <p class="lead">Kangaroo Valley is my home and my work base. I've landscaped in and around the valley for years — the same valley I walk, garden and raise my family in. It is a place of river flats, sandstone ridges and bushland interfaces, where properties range from small village blocks to sprawling acreage. I know this landscape — the way the valley floor holds the morning fog, how the wind funnels between the ridges, and which soil holds moisture and which one never seems to dry out.</p>
     </div>
     <div class="area-hero reveal">
       <img src="assets/img/area-kangaroo-valley.jpg" alt="Kangaroo Valley — gardens and properties" width="1500" height="1125" loading="lazy" decoding="async">
       <div class="area-hero-copy">
-        <p>We design, build, plant and maintain gardens across Kangaroo Valley and the surrounding districts.</p>
-        <p>We work Kangaroo Valley and the surrounding districts, from village blocks to hobby farms and acreage.</p>
-        <a class="svc-link" href="/services">See Kangaroo Valley services</a>
+        <p>Kangaroo Valley is my home and my work base. I've landscaped in and around the valley for years — the same valley I walk, garden and raise my family in. It is a place of river flats, sandstone ridges and bushland interfaces, where properties range from small village blocks to sprawling acreage. I know this landscape — the way the valley floor holds the morning fog, how the wind funnels between the ridges, and which soil holds moisture and which one never seems to dry out.</p>
+        <a class="svc-link" href="/services">See kangaroo valley services</a>
       </div>
     </div>
   </div>
@@ -167,7 +159,89 @@
     <p class="cta-email">Prefer email? <a href="mailto:mathew.gardensolutions@gmail.com">mathew.gardensolutions@gmail.com</a></p>
   </div>
 </section>
-<footer class="site-footer">
+
+<section class="band band-light">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Local character</h2>
+      <p>Here's what makes this part of the Shoalhaven distinct — and how it affects your garden.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3>Energy</h3>
+        <p>The valley sits in a rain shadow between the coastal ranges and the sea. The floor is sheltered from the open ocean, but the surrounding ridges channel southerly and south-westerly winds through the winter, and cold air settles in low-lying paddocks and the village street after dark — frost pockets are common. In summer, north-westerly heat events can dry the soil out quickly on the exposed ridge-top and hill properties. The Kangaroo Valley River and its creeks moderate the temperature near the water, but the higher country can be considerably cooler. If you are planting on a hilltop or a hollow, think about aspect: a north-facing slope in winter gets the sun first and stays warmer; a south-facing slope stays damper and cooler.</p>
+        <h3>Soil &amp; planting</h3>
+        <p>Most of the valley floor and its first terraces are deep, friable sandy loam over sandstone, with a seasonal topsoil that responds well to organic matter. Near the river flats, alluvial soils are deeper and richer, but they can be waterlogged in heavy rain. On the higher country the soil thins out over rock, and drought-resistant planting is the practical choice. The practical implication: before you plant, work the soil you actually have. Sandy sites need mulching and organic matter to hold moisture; clay pockets near the river need drainage attention before anything is put in the ground.</p>
+      </div>
+      <div>
+        <h3>Landmarks</h3>
+        <p>The village's historic main street, the Kangaroo Valley River and its parklands, and the surrounding Budawang and Murrindindi ranges. The valley road itself is a landmark — a winding route that has shaped the town for more than a century. Local references in my work include properties above the river flats, hillsides near the village, and the national park edges where the bush meets the garden.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-dark" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Work in kangaroo valley</h2>
+      <p class="lead">Real jobs from properties right here in kangaroo valley and the surrounding district.</p>
+    </div>
+    <div class="gallery">
+      
+<figure class="g-item g-c reveal">
+  <img src="assets/img/_originals/051_paving-kv_0241228_072414.jpg" alt="Kangaroo Valley paving and garden project — the valley floor. TruLeaf Landscapes, kangaroo valley" width="1200" height="900" loading="lazy" decoding="async">
+  <figcaption>Kangaroo Valley river flats — the valley floor where many of my jobs are based</figcaption>
+</figure>
+<figure class="g-item g-c reveal">
+  <img src="assets/img/_originals/052_paving-kv_0241228_104631.jpg" alt="Kangaroo Valley property renovation — village block to hobby farm. TruLeaf Landscapes, kangaroo valley" width="1200" height="900" loading="lazy" decoding="async">
+  <figcaption>Kangaroo Valley property — village block to hobby farm</figcaption>
+</figure>
+    </div>
+  </div>
+</section>
+
+<section class="band band-light" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Local questions</h2>
+      <p class="lead">Common questions from kangaroo valley properties — answered for this part of the district.</p>
+    </div>
+    <div class="faq-grid">
+      
+<div class="faq-item reveal">
+  <div class="faq-question">Will the winter wind ruin a new hedge?</div>
+  <div class="faq-answer">Yes, if you plant in a exposed position without preparing the soil. Plant on a north-facing slope where possible, stake the hedge for the first two winters, and mulch well. A sheltered spot with added organic matter will survive the southerly far better than an exposed one.</div>
+</div>
+<div class="faq-item reveal">
+  <div class="faq-question">What soil do I need for a native garden here?</div>
+  <div class="faq-answer">Native gardens in the valley do best in deep sandy loam over sandstone. If your soil is sandy, mix in compost and mulch; if it's clay near the river flats, improve drainage first. The key is matching the plant to the soil you have, not the soil you wish you had.</div>
+</div>
+<div class="faq-item reveal">
+  <div class="faq-question">When is the best planting window?</div>
+  <div class="faq-answer">Late summer to early winter gives roots time to establish before the winter winds and spring growth. Planting in cool-season soil where moisture is still available gives the best survival rate through the dry summer.</div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-orange cta-band" id="nap">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Local details</h2>
+      <p class="lead">Everything you need for this part of the district.</p>
+    </div>
+    <div class="nap-block">
+      <p><strong>TruLeaf Landscapes</strong></p>
+      <p>TruLeaf Landscapes
+Kangaroo Valley NSW 2520
+0423 325 989
+mathew.gardensolutions@gmail.com</p>
+      <p><em>Recommended for properties in kangaroo valley and the surrounding district.</em></p>
+    </div>
+  </div>
+</section>
+<footer>
 <div class="social-block">
   <p class="social-block-title">Social links</p>
   <div class="social-row">
@@ -176,70 +250,40 @@
     <a class="social-card" href="https://www.instagram.com/truleaflandscapes/">Instagram</a>
   </div>
 </div>
-
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <img src="assets/logo-footer.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
-        <p class="tagline">Perfecting nature, one leaf at a time.</p>
-        <p>We do landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Every photo on this site is a real job.</p>
-      </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/gallery">Our Work</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="https://www.facebook.com/111097840664886">Facebook</a></li>
-          <li><a href="https://www.instagram.com/truleaflandscapes/">Instagram</a></li>
-          <li><a href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a></li>
-        </ul>
-      </div>
+<div class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="assets/logo-footer.png" alt="TruLeaf Landscapes logo" width="1640" height="225">
+      <p class="tagline">Perfecting nature, one leaf at a time.</p>
+      <p>We do landscaping, garden maintenance and property work across Kangaroo Valley. Every photo on this site is a real job.</p>
     </div>
-    <div class="foot-base">
-      <span>&copy; 2026 TruLeaf Landscapes. Fully insured. ABN 82 653 192 795.</span>
-      <span>Hourly billing. Every job gets a free, no-obligation quote.</span>
-      <a href="/privacy">Privacy</a>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/gallery">Our Work</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/111097840664886">Facebook</a></li>
+        <li><a href="https://www.instagram.com/truleaflandscapes/">Instagram</a></li>
+        <li><a href="https://maps.app.goo.gl/ooaTnEJy9oRyYt2r7">Google Business Profile</a></li>
+      </ul>
     </div>
   </div>
+  <div class="foot-base">
+    <span>&copy; 2026 TruLeaf Landscapes. Fully insured. ABN 82 653 192 795.</span>
+    <span>Hourly billing. Every job gets a free, no-obligation quote.</span>
+    <a href="/privacy">Privacy</a>
+  </div>
+</div>
 </footer>
-<script>
-(function () {
-  var root = document.documentElement;
-  root.classList.add('js');
-
-  var menuBtn = document.querySelector('.hamburger');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', function () {
-      var h = document.querySelector('.site-header');
-      var open = h.classList.toggle('nav-open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  if (!('IntersectionObserver' in window) ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-
-  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-})();
-</script>
+<script type="application/ld+json">{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ {"@type":"ListItem","position":1,"name":"Home","item":"https://truleaflandscapes.com"}, {"@type":"ListItem","position":2,"name":"Kangaroo Valley","item":"https://truleaflandscapes.com/kangaroo-valley"} ] }</script>
 </body>
 </html>

@@ -29,7 +29,7 @@
   "name": "TruLeaf Landscapes",
   "description": "Landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Real work, real photos.",
   "telephone": "+61 423 325 989",
-  "url": "https://www.truleaflandscapes.com",
+  "url": "https://truleaflandscapes.com",
   "taxID": "82653192795",
   "areaServed": ["Kangaroo Valley", "Beaumont", "Berry", "Bomaderry", "Sussex Inlet", "Princes Highway corridor"],
   "openingHoursSpecification": [
@@ -47,19 +47,22 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+
   gtag('js', new Date());
   gtag('config', 'G-YQ600CHMN6');
-</script>
-<script>
-  /* GA4 event tracking
-     Events:
-       - generate_lead : "Text a photo" (SMS) + Call (tel) buttons
-       - submit_form   : contact/quote form submitted
-       - view_project  : portfolio / service pages opened
-       - page_view     : native pageview (pushed automatically by gtag('config'))
-  */
 
-  // --- generate_lead: "Text a photo" (SMS) + Call (tel) --------------------
+  /* ============================================================
+     GA4 event tracking
+
+     Events documented at /docs/ga4-events.md
+       - cta_click  : fired when a clickable call-to-action is tapped/clicked
+       - form_submit : fired when any <form> is submitted
+       - project_view : fired when a portfolio / service page is opened
+     ============================================================ */
+
+  // --- 1) CTA clicks -------------------------------------------------
+  // Only the site's real call-to-action schemes are tracked: sms, tel,
+  // mailto, anchors, and the labelled .nav-cta button.
   document.addEventListener('click', function (e) {
     var target = (e && e.target) || null;
     if (!target) return;
@@ -68,43 +71,56 @@
     if (!href) return;
 
     var method = null;
-    if (/^sms:/.test(href)) { method = 'SMS'; }
-    else if (/^tel:/.test(href)) { method = 'phone'; }
+    if (/^sms:/.test(href)) { method = 'sms'; }
+    else if (/^tel:/.test(href)) { method = 'tel'; }
     else if (/^mailto:/.test(href)) { method = 'email'; }
-    else return;
+    else if (href.charAt(0) === '#') { method = 'anchor'; }
+    else if (typeof target.closest === 'function' && target.closest('.nav-cta')) { method = 'nav'; }
+    if (!method) return;
 
-    gtag('event', 'generate_lead', {
-      cta: (method === 'SMS' ? 'text_a_photo' : (method === 'phone' ? 'phone_call' : 'email')),
-      method: method
+    gtag('event', 'cta_click', {
+      method: method,
+      label: (typeof target.textContent === 'string' ? target.textContent.trim().slice(0, 50) : '')
     });
   }, true);
 
-  // --- submit_form: contact/quote form submitted ---------------------------
+  // --- 2) Form submissions -------------------------------------------
+  // The site ships with no <form> (README: "No enquiry, contact or quote form").
+  // This listener is wired so that any <form> added later records a
+  // form_submit automatically; currently nothing will fire.
   document.addEventListener('submit', function (e) {
     var form = (e && e.target) || null;
     if (!form || form.nodeName !== 'FORM') return;
-    gtag('event', 'submit_form', {
-      form_name: (typeof form.getAttribute === 'function' ? form.getAttribute('data-form-name') : '') ||
-                 (typeof form.name === 'string' ? form.name : ''),
-      form_id: (typeof form.id === 'string' ? form.id : '')
+    gtag('event', 'form_submit', {
+      form_id: (typeof form.id === 'string' ? form.id : ''),
+      form_name: (typeof form.name === 'string' ? form.name : ''),
+      method: (typeof form.getAttribute === 'function' ? form.getAttribute('method') : '')
     });
   });
 
-  // --- view_project: portfolio / service pages -----------------------------
+  // --- 3) Project view -------------------------------------------------
+  // 'Our Work' portfolio + service detail pages. The standard gtag config()
+  // already pushes a page_view; this adds a distinct project_view event.
   (function () {
     var path = '';
     if (typeof window !== 'undefined' && window.location && window.location.pathname) {
       path = window.location.pathname;
     }
+    // Normalize trailing .html so project_view fires for both /x and /x.html.
     var normalized = path.replace(/\.html$/, '');
-    var projectPages = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|property-cleanups-garden-makeovers|retaining-walls-paving|stump-grinding|garden-design-landscaping-turf|service-areas|gallery)(\/)?$/;
-    if (projectPages.test(normalized)) {
-      gtag('event', 'view_project', { project_id: normalized.replace(/\.html$/, '') });
+    var projectPage = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|
+                          hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|
+                          property-cleanups-garden-makeovers|retaining-walls-paving|
+                          stump-grinding|garden-design-landscaping-turf|service-areas|gallery)
+                       (\/)?$/;
+    if (projectPage.test(normalized)) {
+      gtag('event', 'project_view', {
+        project_id: normalized.replace(/\.html$/, '')
+      });
     }
   })();
-
-  // --- page_view : native — pushed automatically by gtag('config') ---------
 </script>
+
 
 
 
@@ -126,6 +142,8 @@
       <a href="/kangaroo-valley">Kangaroo Valley</a>
       <a href="/service-areas">Service Areas</a>
       <a href="/privacy">Privacy</a>
+      <a href="/faq">FAQ</a>
+      <a href="/blog">Blog</a>
       <a href="/contact">Contact</a>
       <a class="nav-cta" href="sms:0423325989">Text a photo</a>
     </nav>
@@ -176,6 +194,7 @@
           <li><a href="/services">Services</a></li>
           <li><a href="/gallery">Our Work</a></li>
           <li><a href="/about">About</a></li>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
       </div>

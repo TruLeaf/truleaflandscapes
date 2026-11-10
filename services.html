@@ -29,7 +29,7 @@
   "name": "TruLeaf Landscapes",
   "description": "Landscaping, garden maintenance and property work across Kangaroo Valley and the surrounding area. Real work, real photos.",
   "telephone": "+61 423 325 989",
-  "url": "https://www.truleaflandscapes.com",
+  "url": "https://truleaflandscapes.com",
   "taxID": "82653192795",
   "areaServed": ["Kangaroo Valley", "Beaumont", "Berry", "Bomaderry", "Sussex Inlet", "Princes Highway corridor"],
   "openingHoursSpecification": [
@@ -47,19 +47,22 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+
   gtag('js', new Date());
   gtag('config', 'G-YQ600CHMN6');
-</script>
-<script>
-  /* GA4 event tracking
-     Events:
-       - generate_lead : "Text a photo" (SMS) + Call (tel) buttons
-       - submit_form   : contact/quote form submitted
-       - view_project  : portfolio / service pages opened
-       - page_view     : native pageview (pushed automatically by gtag('config'))
-  */
 
-  // --- generate_lead: "Text a photo" (SMS) + Call (tel) --------------------
+  /* ============================================================
+     GA4 event tracking
+
+     Events documented at /docs/ga4-events.md
+       - cta_click  : fired when a clickable call-to-action is tapped/clicked
+       - form_submit : fired when any <form> is submitted
+       - project_view : fired when a portfolio / service page is opened
+     ============================================================ */
+
+  // --- 1) CTA clicks -------------------------------------------------
+  // Only the site's real call-to-action schemes are tracked: sms, tel,
+  // mailto, anchors, and the labelled .nav-cta button.
   document.addEventListener('click', function (e) {
     var target = (e && e.target) || null;
     if (!target) return;
@@ -68,43 +71,56 @@
     if (!href) return;
 
     var method = null;
-    if (/^sms:/.test(href)) { method = 'SMS'; }
-    else if (/^tel:/.test(href)) { method = 'phone'; }
+    if (/^sms:/.test(href)) { method = 'sms'; }
+    else if (/^tel:/.test(href)) { method = 'tel'; }
     else if (/^mailto:/.test(href)) { method = 'email'; }
-    else return;
+    else if (href.charAt(0) === '#') { method = 'anchor'; }
+    else if (typeof target.closest === 'function' && target.closest('.nav-cta')) { method = 'nav'; }
+    if (!method) return;
 
-    gtag('event', 'generate_lead', {
-      cta: (method === 'SMS' ? 'text_a_photo' : (method === 'phone' ? 'phone_call' : 'email')),
-      method: method
+    gtag('event', 'cta_click', {
+      method: method,
+      label: (typeof target.textContent === 'string' ? target.textContent.trim().slice(0, 50) : '')
     });
   }, true);
 
-  // --- submit_form: contact/quote form submitted ---------------------------
+  // --- 2) Form submissions -------------------------------------------
+  // The site ships with no <form> (README: "No enquiry, contact or quote form").
+  // This listener is wired so that any <form> added later records a
+  // form_submit automatically; currently nothing will fire.
   document.addEventListener('submit', function (e) {
     var form = (e && e.target) || null;
     if (!form || form.nodeName !== 'FORM') return;
-    gtag('event', 'submit_form', {
-      form_name: (typeof form.getAttribute === 'function' ? form.getAttribute('data-form-name') : '') ||
-                 (typeof form.name === 'string' ? form.name : ''),
-      form_id: (typeof form.id === 'string' ? form.id : '')
+    gtag('event', 'form_submit', {
+      form_id: (typeof form.id === 'string' ? form.id : ''),
+      form_name: (typeof form.name === 'string' ? form.name : ''),
+      method: (typeof form.getAttribute === 'function' ? form.getAttribute('method') : '')
     });
   });
 
-  // --- view_project: portfolio / service pages -----------------------------
+  // --- 3) Project view -------------------------------------------------
+  // 'Our Work' portfolio + service detail pages. The standard gtag config()
+  // already pushes a page_view; this adds a distinct project_view event.
   (function () {
     var path = '';
     if (typeof window !== 'undefined' && window.location && window.location.pathname) {
       path = window.location.pathname;
     }
+    // Normalize trailing .html so project_view fires for both /x and /x.html.
     var normalized = path.replace(/\.html$/, '');
-    var projectPages = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|property-cleanups-garden-makeovers|retaining-walls-paving|stump-grinding|garden-design-landscaping-turf|service-areas|gallery)(\/)?$/;
-    if (projectPages.test(normalized)) {
-      gtag('event', 'view_project', { project_id: normalized.replace(/\.html$/, '') });
+    var projectPage = /^\/(lawn-mowing-lawn-care|garden-maintenance-upkeep|
+                          hedging-pruning-tree-care|irrigation-drainage|ponds-water-features|
+                          property-cleanups-garden-makeovers|retaining-walls-paving|
+                          stump-grinding|garden-design-landscaping-turf|service-areas|gallery)
+                       (\/)?$/;
+    if (projectPage.test(normalized)) {
+      gtag('event', 'project_view', {
+        project_id: normalized.replace(/\.html$/, '')
+      });
     }
   })();
-
-  // --- page_view : native — pushed automatically by gtag('config') ---------
 </script>
+
 
 
 
@@ -126,6 +142,8 @@
       <a href="/kangaroo-valley">Kangaroo Valley</a>
       <a href="/service-areas">Service Areas</a>
       <a href="/privacy">Privacy</a>
+      <a href="/faq">FAQ</a>
+      <a href="/blog">Blog</a>
       <a href="/contact">Contact</a>
       <a class="nav-cta" href="sms:0423325989">Text a photo</a>
     </nav>
@@ -143,7 +161,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <h1>Services</h1>
-      <p class="lead">We do the work — mowing, planting, building and maintaining — across Kangaroo Valley and the surrounding area. Every job is quoted on its own.</p>
+      <p class="lead">We do the work — mowing, planting, building and maintaining — across Kangaroo Valley and the surrounding area, exactly what a gardener would do. Every job is quoted on its own.</p>
     </div>
     <div class="svc-grid">
 
@@ -281,16 +299,44 @@
         </div>
         <div class="svc-grid">
           <div class="svc-card">
-            <h4>How much does lawn mowing cost in Kangaroo Valley?</h4>
-            <p>From $45 for a half-day garden tidy-up. A standard 3/4 acre block with a ride-on mower starts around $90&ndash;$130 depending on distance and site access. We&rsquo;ll always quote on the day.</p>
+            <h4>Where is TruLeaf Landscapes based?</h4>
+            <p>We're based in Kangaroo Valley and work across the surrounding districts, from the coast to the ranges.</p>
           </div>
           <div class="svc-card">
-            <h4>Do you service properties outside Kangaroo Valley?</h4>
-            <p>Yes &mdash; we cover Sussex Inlet, Beaumont, Berry, Bomaderry and the Princes Highway corridor, plus the wider Shoalhaven. Quotes in surrounding districts may include travel time.</p>
+            <h4>Do you travel outside Kangaroo Valley?</h4>
+            <p>Yes — we service Berrara, Basin View, St Georges Basin, Vincentia, Bomaderry, Berry and Sussex Inlet, plus the wider Shoalhaven. Quotes in surrounding districts may include travel time.</p>
           </div>
           <div class="svc-card">
-            <h4>Is TruLeaf a full-service landscaping company?</h4>
-            <p>TruLeaf does everything garden-related: design, build, maintain, mow, prune, mulch, irrigate, grind stumps and install ponds. If we have the equipment, we can likely do it.</p>
+            <h4>Do I need to be home during the job?</h4>
+            <p>No — you don't need to be home. Just leave clear access to the place and we'll text you when we're finished.</p>
+          </div>
+          <div class="svc-card">
+            <h4>How quickly will I get a quote?</h4>
+            <p>Quite quickly. Once we've seen the job, we'll get back to you with a clear estimate on the same day.</p>
+          </div>
+          <div class="svc-card">
+            <h4>Is there a charge for a quote?</h4>
+            <p>No — a quote is always free and there's no obligation.</p>
+          </div>
+          <div class="svc-card">
+            <h4>Do you do garden design as well as maintenance?</h4>
+            <p>Yes. From a full landscape design through to a simple lawn and planting upgrade, we create outdoor spaces that suit your site, soil and lifestyle.</p>
+          </div>
+          <div class="svc-card">
+            <h4>Do you mulch and prepare garden beds?</h4>
+            <p>Yes — we mulch and prepare garden beds as part of our standard garden maintenance, and we can do this as a one-off for a property makeover.</p>
+          </div>
+          <div class="svc-card">
+            <h4>What areas of the Shoalhaven do you cover?</h4>
+            <p>We cover the valley floor and the surrounding districts — the coast, the basin, the ranges and the flats. If you're not sure, just ask.</p>
+          </div>
+          <div class="svc-card">
+            <h4>Do you install irrigation systems?</h4>
+            <p>Yes — we design and install water-wise sprinklers, drip lines and drainage solutions that manage water around your property.</p>
+          </div>
+          <div class="svc-card">
+            <h4>How do I arrange a quote?</h4>
+            <p>Text a photo of the job to 0423 325 989 and we'll get back to you the same day with a clear, no-obligation quote.</p>
           </div>
         </div>
       </div>
@@ -315,26 +361,82 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How much does lawn mowing cost in Kangaroo Valley?",
+          "name": "Where is TruLeaf Landscapes based?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "From $45 for a half-day garden tidy-up. A standard 3/4 acre block with a ride-on mower starts around $90&ndash;$130 depending on distance and site access. We'll always quote on the day."
+            "text": "We're based in Kangaroo Valley and work across the surrounding districts, from the coast to the ranges."
           }
         },
         {
           "@type": "Question",
-          "name": "Do you service properties outside Kangaroo Valley?",
+          "name": "Do you travel outside Kangaroo Valley?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes &mdash; we cover Sussex Inlet, Beaumont, Berry, Bomaderry and the Princes Highway corridor, plus the wider Shoalhaven. Quotes in surrounding districts may include travel time."
+            "text": "Yes — we service Berrara, Basin View, St Georges Basin, Vincentia, Bomaderry, Berry and Sussex Inlet, plus the wider Shoalhaven. Quotes in surrounding districts may include travel time."
           }
         },
         {
           "@type": "Question",
-          "name": "Is TruLeaf a full-service landscaping company?",
+          "name": "Do I need to be home during the job?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "TruLeaf does everything garden-related: design, build, maintain, mow, prune, mulch, irrigate, grind stumps and install ponds. If we have the equipment, we can likely do it."
+            "text": "No — you don't need to be home. Just leave clear access to the place and we'll text you when we're finished."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How quickly will I get a quote?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quite quickly. Once we've seen the job, we'll get back to you with a clear estimate on the same day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a charge for a quote?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No — a quote is always free and there's no obligation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you do garden design as well as maintenance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. From a full landscape design through to a simple lawn and planting upgrade, we create outdoor spaces that suit your site, soil and lifestyle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you mulch and prepare garden beds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — we mulch and prepare garden beds as part of our standard garden maintenance, and we can do this as a one-off for a property makeover."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What areas of the Shoalhaven do you cover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We cover the valley floor and the surrounding districts — the coast, the basin, the ranges and the flats. If you're not sure, just ask."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you install irrigation systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — we design and install water-wise sprinklers, drip lines and drainage solutions that manage water around your property."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I arrange a quote?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Text a photo of the job to 0423 325 989 and we'll get back to you the same day with a clear, no-obligation quote."
           }
         }
       ]
@@ -376,6 +478,7 @@
           <li><a href="/services">Services</a></li>
           <li><a href="/gallery">Our Work</a></li>
           <li><a href="/about">About</a></li>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
       </div>
@@ -395,38 +498,7 @@
     </div>
   </div>
 </footer>
-<script type="application/ld+json">{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ {"@type":"ListItem","position":1,"name":"Home","item":"https://www.truleaflandscapes.com"}, {"@type":"ListItem","position":2,"name":"Services","item":"https://www.truleaflandscapes.com/services"} ] }</script>
+<script type="application/ld+json">{ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [ {"@type":"ListItem","position":1,"name":"Home","item":"https://truleaflandscapes.com"}, {"@type":"ListItem","position":2,"name":"Services","item":"https://truleaflandscapes.com/services"} ] }</script>
 
-<script>
-(function () {
-  var root = document.documentElement;
-  root.classList.add('js');
-
-  var menuBtn = document.querySelector('.hamburger');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', function () {
-      var h = document.querySelector('.site-header');
-      var open = h.classList.toggle('nav-open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  if (!('IntersectionObserver' in window) ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-
-  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-})();
-</script>
 </body>
 </html>

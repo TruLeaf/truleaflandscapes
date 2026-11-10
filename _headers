@@ -35,21 +35,27 @@
 # /assets rule — a separate /assets/fonts rule produces a doubled Cache-Control.
 /assets/*
   Cache-Control: public, max-age=0, must-revalidate
+  Cloudflare-CDN-Cache-Control: public, max-age=0, must-revalidate
 
 # HTML and CSS/JS must always be revalidated so updates go live immediately.
 # max-age=0 + must-revalidate means the browser/CDN sends a conditional request
 # and gets a 304 with no body when nothing changed — no bandwidth cost.
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
+  Cloudflare-CDN-Cache-Control: public, max-age=0, must-revalidate
 
 /*.css
   Cache-Control: public, max-age=0, must-revalidate
+  Cloudflare-CDN-Cache-Control: public, max-age=0, must-revalidate
 
 /*.js
   Cache-Control: public, max-age=0, must-revalidate
+  Cloudflare-CDN-Cache-Control: public, max-age=0, must-revalidate
 
 /*.xml
   Cache-Control: public, max-age=0, must-revalidate
+  Cloudflare-CDN-Cache-Control: public, max-age=0, must-revalidate
 
 /*.txt
   Cache-Control: public, max-age=0, must-revalidate
+  Cloudflare-CDN-Cache-Control: public, max-age=0, must-revalidate
